@@ -55,8 +55,8 @@ dependencies {
             throw new GradleException('No backend aar available!')
         }
     } else {
-        if (file('../../gearvrf-libs/backend_oculus-debug.aar').exists()) {
-            compile(name: 'backend_oculus-debug', ext: 'aar')
+        if (file('../../gearvrf-libs/backend-debug.aar').exists()) {
+            compile(name: 'backend-debug', ext: 'aar')
         } else {
             throw new GradleException('No backend aar available!')
         }
