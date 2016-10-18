@@ -19,14 +19,16 @@ package org.gearvrf.modelviewer;
 import org.gearvrf.GVRContext;
 import org.gearvrf.GVRMaterialMap;
 import org.gearvrf.GVRMaterialShaderManager;
-import org.gearvrf.GVRCustomMaterialShaderId;
+//import org.gearvrf.GVRCustomMaterialShaderId;
+import org.gearvrf.GVRShader;
+import org.gearvrf.GVRShaderData;
 
-public class MetalOnlyShader {
+public class MetalOnlyShader extends GVRShader {
 
-    public static final String COLOR_KEY = "color";
-    public static final String LIGHT_KEY = "light";
-    public static final String EYE_KEY = "eye";
-    public static final String RADIUS_KEY = "radius";
+    public static final String COLOR_KEY = "u_color";
+    public static final String LIGHT_KEY = "u_light";
+    public static final String EYE_KEY = "u_eye";
+    public static final String RADIUS_KEY = "u_radius";
     public static final String TEXTURE_KEY = "texture";
 
     public static final String MAT1_KEY = "u_mat1";
@@ -92,10 +94,11 @@ public class MetalOnlyShader {
             + "}\n";
 
 
-    private GVRCustomMaterialShaderId mShaderId;
+   // private GVRCustomMaterialShaderId mShaderId;
     private GVRMaterialMap mCustomShader = null;
 
     public MetalOnlyShader(GVRContext gvrContext) {
+        /*
         final GVRMaterialShaderManager shaderManager = gvrContext
                 .getMaterialShaderManager();
         mShaderId = shaderManager.addShader(VERTEX_SHADER, FRAGMENT_SHADER);
@@ -104,11 +107,19 @@ public class MetalOnlyShader {
         mCustomShader.addUniformVec3Key("u_light", LIGHT_KEY);
         mCustomShader.addUniformVec3Key("u_eye", EYE_KEY);
         mCustomShader.addUniformFloatKey("u_radius", RADIUS_KEY);
-        mCustomShader.addTextureKey("texture", TEXTURE_KEY);
+        mCustomShader.addTextureKey("texture", TEXTURE_KEY);*/
+
+        super("float4 u_color, float3 u_light, float3 u_eye, float u_radius", "sampler2D texture", "float4 a_position, float3 a_normal, float2 a_tex_coord");
+        setSegment("FragmentTemplate", FRAGMENT_SHADER);
+        setSegment("VertexTemplate", VERTEX_SHADER);
 
     }
 
-    public GVRCustomMaterialShaderId getShaderId() {
-        return mShaderId;
+   protected void setMaterialDefaults(GVRShaderData material)
+   {
+        material.setVec4("u_color", 1, 1, 1, 1);
+        material.setVec3("u_light", 1, 1, 1);
+        material.setVec3("u_eye", 0, 0, 0);
+        material.setFloat("u_radius", 1);
     }
 }

@@ -18,6 +18,7 @@ package org.gearvrf.complexscene;
 import android.graphics.Color;
 
 import org.gearvrf.GVRAndroidResource;
+import org.gearvrf.GVRColorShader;
 import org.gearvrf.GVRContext;
 import org.gearvrf.GVRMaterial;
 import org.gearvrf.GVRMesh;
@@ -34,8 +35,6 @@ public class SampleMain extends GVRScript {
 
     private GVRConsole console;
     
-    private ColorShader mColorShader = null;
-
     @Override
     public SplashMode getSplashMode() {
         return SplashMode.NONE;
@@ -47,7 +46,6 @@ public class SampleMain extends GVRScript {
         // save context for possible use in onStep(), even though that's empty
         // in this sample
         mGVRContext = gvrContext;
-        mColorShader = new ColorShader(mGVRContext);
 
         // set background color
         GVRScene scene = gvrContext.getMainScene();
@@ -104,10 +102,15 @@ public class SampleMain extends GVRScript {
     }
 
     private GVRSceneObject getColorMesh(float scale, GVRMesh mesh) {
+        //GVRMaterial material = new GVRMaterial(mGVRContext,
+        //        mColorShader.getShaderId());
+
         GVRMaterial material = new GVRMaterial(mGVRContext,
-                mColorShader.getShaderId());
-        material.setVec4(ColorShader.COLOR_KEY, 1.0f,
-                0.0f, 1.0f, 1.0f);
+                GVRMaterial.GVRShaderType.Color.ID);
+
+      //  material.setVec4(ColorShader.COLOR_KEY, 1.0f,
+       //         0.0f, 1.0f, 1.0f);
+        material.setColor(1.0f, 0.0f, 1.0f);
 
         GVRSceneObject meshObject = null;
         meshObject = new GVRSceneObject(mGVRContext, mesh);

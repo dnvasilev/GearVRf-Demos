@@ -19,15 +19,14 @@ package org.gearvrf.gvreyepicking;
 import org.gearvrf.GVRContext;
 import org.gearvrf.GVRMaterialMap;
 import org.gearvrf.GVRMaterialShaderManager;
-import org.gearvrf.GVRShaderTemplate;
+import org.gearvrf.GVRShader;
+import org.gearvrf.GVRShaderData;
 import org.gearvrf.R;
 import org.gearvrf.utility.TextFile;
 
 import android.content.Context;
 
-import org.gearvrf.GVRCustomMaterialShaderId;
-
-public class ColorShader extends GVRShaderTemplate
+public class ColorShader extends GVRShader
 {
     private static final String VERTEX_SHADER = "in vec4 a_position;\n"
             + "uniform mat4 u_mvp;\n"
@@ -44,9 +43,13 @@ public class ColorShader extends GVRShaderTemplate
 
     public ColorShader(GVRContext gvrContext)
     {
-        super("float4 u_color", 300);
+        super("float4 u_color", "", "float3 a_position", 300);
         setSegment("FragmentTemplate", FRAGMENT_SHADER);
         setSegment("VertexTemplate", VERTEX_SHADER);
     }
 
+    protected void setMaterialDefaults(GVRShaderData material)
+    {
+        material.setVec4("u_color", 0.5f, 0.5f, 0.5f, 1);
+    }
 }

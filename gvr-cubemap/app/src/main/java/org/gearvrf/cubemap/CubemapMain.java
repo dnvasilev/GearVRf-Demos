@@ -221,8 +221,11 @@ public class CubemapMain extends GVRMain {
                 break;
         }
 
-        GVRMaterial cubemapReflectionMaterial = new GVRMaterial(mGVRContext);
-        cubemapReflectionMaterial.setTexture("diffuseTexture", mFutureCubemapTexture);
+        //GVRMaterial cubemapReflectionMaterial = new GVRMaterial(mGVRContext);
+        //cubemapReflectionMaterial.setTexture("diffuseTexture", mFutureCubemapTexture);
+
+        GVRMaterial cubemapReflectionMaterial = new GVRMaterial(mGVRContext, GVRMaterial.GVRShaderType.CubemapReflection.ID);
+        cubemapReflectionMaterial.setTexture("u_texture", mFutureCubemapTexture);
 
         GVRSceneObject sphere = null;
         switch (mReflectiveType) {
