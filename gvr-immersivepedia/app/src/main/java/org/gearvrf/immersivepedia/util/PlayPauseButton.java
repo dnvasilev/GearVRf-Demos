@@ -17,6 +17,7 @@ package org.gearvrf.immersivepedia.util;
 
 import org.gearvrf.GVRAndroidResource;
 import org.gearvrf.GVRContext;
+import org.gearvrf.GVRMaterial;
 import org.gearvrf.GVRTexture;
 import org.gearvrf.immersivepedia.R;
 import org.gearvrf.immersivepedia.focus.FocusableSceneObject;
@@ -52,8 +53,9 @@ public class PlayPauseButton extends FocusableSceneObject {
     }
 
     private void setTextures() {
-        getRenderData().getMaterial().setTexture(PAUSE_NORMAL, pauseNormal);
-        getRenderData().getMaterial().setTexture(PAUSE_HOVER, pauseHover);
+        GVRMaterial m = getRenderData().getMaterial();
+        m.setTexture(PAUSE_NORMAL, pauseNormal);
+        m.setTexture(PAUSE_HOVER, pauseHover);
         getRenderData().getMaterial().setTexture(PLAY_HOVER, playHover);
         getRenderData().getMaterial().setTexture(PLAY_NORMAL, playNormal);
     }

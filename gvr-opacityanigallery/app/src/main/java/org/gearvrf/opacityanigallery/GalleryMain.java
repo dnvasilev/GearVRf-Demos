@@ -27,6 +27,7 @@ import org.gearvrf.GVRScene;
 import org.gearvrf.GVRSceneObject;
 import org.gearvrf.GVRMain;
 import org.gearvrf.GVRScript;
+import org.gearvrf.GVRShaderId;
 import org.gearvrf.GVRTexture;
 import org.gearvrf.animation.GVRAnimation;
 import org.gearvrf.animation.GVRAnimationEngine;
@@ -137,13 +138,18 @@ public class GalleryMain extends GVRScript {
         mBoards.get(mSelected).getTransform()
                 .setScale(SELECTED_SCALE, SELECTED_SCALE, 0.0f);
 
-        CustomPostEffectShaderManager shaderManager = new CustomPostEffectShaderManager(
-                mGVRContext);
+//        CustomPostEffectShaderManager shaderManager = new CustomPostEffectShaderManager(
+//                mGVRContext);
+//        GVRPostEffect postEffect = new GVRPostEffect(mGVRContext,
+//                shaderManager.getShaderId());
+        //CustomPostEffectShaderManager shaderManager = new CustomPostEffectShaderManager(
+        //        mGVRContext);
         GVRPostEffect postEffect = new GVRPostEffect(mGVRContext,
-                shaderManager.getShaderId());
-        postEffect.setVec3("ratio_r", 0.393f, 0.769f, 0.189f);
-        postEffect.setVec3("ratio_g", 0.349f, 0.686f, 0.168f);
-        postEffect.setVec3("ratio_b", 0.272f, 0.534f, 0.131f);
+                new GVRShaderId(CustomPostEffectShaderManager.class));
+
+        postEffect.setVec3("u_ratio_r", 0.393f, 0.769f, 0.189f);
+        postEffect.setVec3("u_ratio_g", 0.349f, 0.686f, 0.168f);
+        postEffect.setVec3("u_ratio_b", 0.272f, 0.534f, 0.131f);
         mainScene.getMainCameraRig().getLeftCamera().addPostEffect(postEffect);
         mainScene.getMainCameraRig().getRightCamera().addPostEffect(postEffect);
 

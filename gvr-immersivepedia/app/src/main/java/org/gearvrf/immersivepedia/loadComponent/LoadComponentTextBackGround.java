@@ -18,12 +18,15 @@ package org.gearvrf.immersivepedia.loadComponent;
 import org.gearvrf.GVRAndroidResource;
 import org.gearvrf.GVRContext;
 import org.gearvrf.GVRDrawFrameListener;
+import org.gearvrf.GVRMaterial;
 import org.gearvrf.GVRSceneObject;
+import org.gearvrf.GVRShaderId;
 import org.gearvrf.GVRTexture;
 import org.gearvrf.immersivepedia.R;
 import org.gearvrf.immersivepedia.focus.FocusListener;
 import org.gearvrf.immersivepedia.focus.FocusableSceneObject;
 import org.gearvrf.immersivepedia.shader.CutoutShader;
+import org.gearvrf.immersivepedia.shader.MenuImageShader;
 import org.gearvrf.immersivepedia.util.RenderingOrderApplication;
 
 public class LoadComponentTextBackGround extends GVRSceneObject implements FocusListener {
@@ -71,8 +74,9 @@ public class LoadComponentTextBackGround extends GVRSceneObject implements Focus
         circle.getRenderData().setRenderingOrder(RenderingOrderApplication.LOADING_COMPONENT);
         circle.focusListener = this;
 
-        circleAlpha.getRenderData().getMaterial()
-                .setShaderType(new CutoutShader(gvrContext).getShaderId());
+        //circleAlpha.getRenderData().getMaterial().setShaderType(new CutoutShader(gvrContext).getShaderId());
+        circleAlpha.getRenderData().setMaterial(new GVRMaterial(getGVRContext(), new GVRShaderId(CutoutShader.class)));
+
         circleAlpha.getRenderData().getMaterial()
                 .setTexture(CutoutShader.TEXTURE_KEY, circleAlphaTexture);
         circleAlpha.getRenderData().setRenderingOrder(RenderingOrderApplication.LOADING_COMPONENT);

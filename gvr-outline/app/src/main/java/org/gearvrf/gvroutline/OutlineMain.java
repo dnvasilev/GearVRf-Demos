@@ -24,6 +24,7 @@ import org.gearvrf.GVRContext;
 import org.gearvrf.GVRScene;
 import org.gearvrf.GVRSceneObject;
 import org.gearvrf.GVRMain;
+import org.gearvrf.GVRShaderId;
 import org.gearvrf.GVRTexture;
 import org.gearvrf.GVRMaterial;
 import org.gearvrf.GVRMesh;
@@ -46,7 +47,8 @@ public class OutlineMain extends GVRMain {
     private GVRActivity mActivity;
      
     private static final String TAG = "OutlineSample";
- 
+    private GVRShaderId outlineID;
+
     public OutlineMain(GVRActivity activity) {
       mActivity = activity;
     }
@@ -70,8 +72,9 @@ public class OutlineMain extends GVRMain {
           mCharacter.getTransform().setRotationByAxis(-90.0f, 1.0f, 0.0f, 0.0f);
 
           // Create Base Material Pass
-          // ---------------------------------------------------------------
-          GVRMaterial outlineMaterial = new GVRMaterial(mGVRContext);
+          // --------------------------------------------------------------
+          outlineID = new GVRShaderId(OutlineShader.class);
+          GVRMaterial outlineMaterial = new GVRMaterial(mGVRContext, outlineID);
   
           // Brown-ish outline color
           outlineMaterial.setVec4(OutlineShader.COLOR_KEY, 0.4f, 0.1725f,
@@ -80,7 +83,7 @@ public class OutlineMain extends GVRMain {
   
           // For outline we want to cull front faces
           mCharacter.getRenderData().setMaterial(outlineMaterial);
-          mCharacter.getRenderData().setShaderTemplate(OutlineShader.class);
+          //mCharacter.getRenderData().setShaderTemplate(OutlineShader.class);
           mCharacter.getRenderData().setCullFace(GVRCullFaceEnum.Front);
 
           // Create Additional Pass

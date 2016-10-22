@@ -68,7 +68,7 @@ public class CubemapMain extends GVRMain {
         mGVRContext = gvrContext;
 
         GVRScene scene = mGVRContext.getNextMainScene();
-        scene.setStatsEnabled(true);
+        //scene.setStatsEnabled(true);
         scene.setFrustumCulling(true);
 
         // Uncompressed cubemap texture

@@ -189,11 +189,11 @@ public class ShadowsMain extends GVRMain {
     {
         Future<GVRTexture> texture = context.loadFutureTexture(new GVRAndroidResource(context, "cube.jpg"));
         GVRMaterial litMaterial = new GVRMaterial(context);
-        litMaterial.setVec4("diffuseColor", 1.0f, 1.0f, 1.0f, 1.0f);
-        litMaterial.setVec4("ambientColor", 0.5f, 0.5f, 0.5f, 0.0f);
-        litMaterial.setVec4("specularColor", 1.0f, 1.0f, 1.0f, 1.0f);
-        litMaterial.setVec4("emissiveColor", 0.0f, 0.0f, 0.0f, 0.0f);
-        litMaterial.setFloat("specularExponent", 10.0f);
+        litMaterial.setVec4("diffuse_color", 1.0f, 1.0f, 1.0f, 1.0f);
+        litMaterial.setVec4("ambient_color", 0.5f, 0.5f, 0.5f, 0.0f);
+        litMaterial.setVec4("specular_color", 1.0f, 1.0f, 1.0f, 1.0f);
+        litMaterial.setVec4("emissive_color", 0.0f, 0.0f, 0.0f, 0.0f);
+        litMaterial.setFloat("specular_exponent", 10.0f);
         litMaterial.setTexture("diffuseTexture", texture);
         return litMaterial;
     }

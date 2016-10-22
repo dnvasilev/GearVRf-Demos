@@ -16,28 +16,43 @@
 
 package org.gearvrf.opacityanigallery;
 
+import android.content.Context;
+
 import org.gearvrf.GVRContext;
 import org.gearvrf.GVRCustomPostEffectShaderId;
 import org.gearvrf.GVRPostEffectMap;
 import org.gearvrf.GVRPostEffectShaderManager;
+import org.gearvrf.GVRShader;
+import org.gearvrf.GVRShaderData;
 import org.gearvrf.opacityanigallery.R;
+import org.gearvrf.utility.TextFile;
 
-public class CustomPostEffectShaderManager {
+public class CustomPostEffectShaderManager extends GVRShader {
 
-    private final GVRCustomPostEffectShaderId mShaderId;
+    //private final GVRCustomPostEffectShaderId mShaderId;
     private GVRPostEffectMap mCustomShader;
 
     public CustomPostEffectShaderManager(GVRContext gvrContext) {
+        /*
         final GVRPostEffectShaderManager shaderManager = gvrContext
                 .getPostEffectShaderManager();
         mShaderId = shaderManager.addShader(R.raw.vertex, R.raw.fragment);
         mCustomShader = shaderManager.getShaderMap(mShaderId);
         mCustomShader.addUniformVec3Key("u_ratio_r", "ratio_r");
         mCustomShader.addUniformVec3Key("u_ratio_g", "ratio_g");
-        mCustomShader.addUniformVec3Key("u_ratio_b", "ratio_b");
+        mCustomShader.addUniformVec3Key("u_ratio_b", "ratio_b");*/
+        super("float3 u_ratio_r float3 u_ratio_g float3 u_ratio_b", "sampler2D u_texture", "float4 a_position, float4 a_tex_coord");
+
+        Context context = gvrContext.getContext();
+        setSegment("FragmentTemplate", TextFile.readTextFile(context, R.raw.fragment));
+        setSegment("VertexTemplate", TextFile.readTextFile(context,R.raw.vertex));
+
     }
 
-    public GVRCustomPostEffectShaderId getShaderId() {
-        return mShaderId;
+    protected void setMaterialDefaults(GVRShaderData material)
+    {
+        material.setVec3("u_ratio_r", 1, 1, 1);
+        material.setVec3("u_ratio_g", 1, 1, 1);
+        material.setVec3("u_ratio_b", 1, 1, 1);
     }
 }

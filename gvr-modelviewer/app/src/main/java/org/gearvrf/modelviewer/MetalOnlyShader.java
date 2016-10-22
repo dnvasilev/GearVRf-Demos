@@ -121,5 +121,5 @@ public class MetalOnlyShader extends GVRShader {
         material.setVec3("u_light", 1, 1, 1);
         material.setVec3("u_eye", 0, 0, 0);
         material.setFloat("u_radius", 1);
-    }
+   }
 }
