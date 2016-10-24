@@ -19,15 +19,17 @@ package org.gearvrf.widgetViewer;
 import org.gearvrf.GVRContext;
 import org.gearvrf.GVRMaterialMap;
 import org.gearvrf.GVRMaterialShaderManager;
-import org.gearvrf.GVRCustomMaterialShaderId;
+//import org.gearvrf.GVRCustomMaterialShaderId;
+import org.gearvrf.GVRShader;
+import org.gearvrf.GVRShaderData;
 
-public class PhongShader3 {
+public class PhongShader3 extends GVRShader {
 
-    public static final String LIGHT_KEY = "light";
-    public static final String EYE_KEY = "eye";
-    public static final String RADIUS_KEY = "radius";
+    public static final String LIGHT_KEY = "u_light";
+    public static final String EYE_KEY = "u_eye";
+    public static final String RADIUS_KEY = "u_radius";
     public static final String ENV_KEY = "env";
-    public static final String TEXTURE_KEY = "texture";
+    public static final String TEXTURE_KEY = "intexture";
 
     public static final String MAT1_KEY = "u_mat1";
     public static final String MAT2_KEY = "u_mat2";
@@ -35,7 +37,7 @@ public class PhongShader3 {
     public static final String MAT4_KEY = "u_mat4";
 
     private static final String VERTEX_SHADER = "" //
-            + "#version 300 es\n"
+            //          + "#version 300 es\n"
             + "in vec4 a_position;\n"
             + "in vec3 a_normal;\n" //
             + "in vec2 a_tex_coord;\n"
@@ -69,7 +71,7 @@ public class PhongShader3 {
             + "}\n";
 
     private static final String FRAGMENT_SHADER = "" //
-            + "#version 300 es\n"
+            //          + "#version 300 es\n"
             + "precision mediump float;\n"
             + "in vec2  coord;\n"
             + "uniform vec4  u_color;\n"
@@ -108,10 +110,11 @@ public class PhongShader3 {
             + "  FragColor = vec4( 0.1*color + 0.9*color1, 1.0 );\n" //
             + "}\n";
 
-    private GVRCustomMaterialShaderId mShaderId;
-    private GVRMaterialMap mCustomShader = null;
+    // private GVRCustomMaterialShaderId mShaderId;
+    // private GVRMaterialMap mCustomShader = null;
 
     public PhongShader3(GVRContext gvrContext) {
+        /*
         final GVRMaterialShaderManager shaderManager = gvrContext
                 .getMaterialShaderManager();
         mShaderId = shaderManager.addShader(VERTEX_SHADER, FRAGMENT_SHADER);
@@ -125,10 +128,22 @@ public class PhongShader3 {
         mCustomShader.addUniformVec4Key("u_mat1", MAT1_KEY);
         mCustomShader.addUniformVec4Key("u_mat2", MAT2_KEY);
         mCustomShader.addUniformVec4Key("u_mat3", MAT3_KEY);
-        mCustomShader.addUniformVec4Key("u_mat4", MAT4_KEY);
+        mCustomShader.addUniformVec4Key("u_mat4", MAT4_KEY);*/
+
+        super("float3 u_light, float3 u_eye, float u_radius, float4 u_mat1, float4 u_mat2, float4 u_mat3, float4 u_mat4", "sampler2D intexture, sampler2D env", "float4 a_position, float3 a_normal, float2 a_tex_coord", 300);
+        setSegment("FragmentTemplate", FRAGMENT_SHADER);
+        setSegment("VertexTemplate", VERTEX_SHADER);
     }
 
-    public GVRCustomMaterialShaderId getShaderId() {
-        return mShaderId;
+    protected void setMaterialDefaults(GVRShaderData material)
+    {
+        material.setVec3("u_light", 1, 1, 1);
+        material.setVec3("u_eye", 0, 0, 0);
+        material.setFloat("u_radius", 1);
+        material.setVec4("u_mat1", 1, 1, 1, 1);
+        material.setVec4("u_mat2", 1, 1, 1, 1);
+        material.setVec4("u_mat3", 1, 1, 1, 1);
+        material.setVec4("u_mat4", 1, 1, 1, 1);
     }
 }
+

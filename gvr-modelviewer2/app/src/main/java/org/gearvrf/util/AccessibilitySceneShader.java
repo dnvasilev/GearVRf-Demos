@@ -14,15 +14,15 @@ package org.gearvrf.util;
 import org.gearvrf.modelviewer2.R;
 
 import org.gearvrf.GVRContext;
-import org.gearvrf.GVRCustomMaterialShaderId;
+//import org.gearvrf.GVRCustomMaterialShaderId;
 import org.gearvrf.GVRMaterialMap;
 import org.gearvrf.GVRMaterialShaderManager;
 
 public class AccessibilitySceneShader {
-
+/*
     public static final String TEXTURE_KEY = "texture";
     public static final String BLUR_INTENSITY = "blur";
-    private GVRCustomMaterialShaderId mShaderId;
+    //private GVRCustomMaterialShaderId mShaderId;
     private GVRMaterialMap mCustomShader = null;
 
     public AccessibilitySceneShader(GVRContext gvrContext) {
@@ -36,5 +36,5 @@ public class AccessibilitySceneShader {
 
     public GVRCustomMaterialShaderId getShaderId() {
         return mShaderId;
-    }
+    }*/
 }

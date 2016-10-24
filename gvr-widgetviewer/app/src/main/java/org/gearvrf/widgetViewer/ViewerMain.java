@@ -30,7 +30,9 @@ public class ViewerMain extends GVRScript {
     private static final String TAG = "ViewerMain";
 
     private GVRWidgetPlugin mPlugin;
-    private GVRContext mGVRContext = null; 
+    private GVRContext mGVRContext = null;
+
+    /*
     private MetalOnlyShader mMetalOnlyShader = null;
     private GlassShader mGlassShader = null;
     private DiffuseShader mDiffuseShader = null;
@@ -41,7 +43,7 @@ public class ViewerMain extends GVRScript {
     private GlassShader2 mGlassShader2 = null;
     private DiffuseShader2 mDiffuseShader2 = null;
     private PhongShader2 mPhongShader2 = null;
-    private PhongShader3 mPhongShader3 = null;
+    private PhongShader3 mPhongShader3 = null;*/
 
     private GVRMaterial mMetalMaterial = null;
     private GVRMaterial mGlassMaterial = null;
@@ -116,7 +118,8 @@ public class ViewerMain extends GVRScript {
 
     @Override
     public void onInit(GVRContext gvrContext) {
-        mGVRContext = gvrContext;      
+        mGVRContext = gvrContext;
+        /*
         mMetalOnlyShader = new MetalOnlyShader(mGVRContext);
         mDiffuseShader = new DiffuseShader(mGVRContext);
         mGlassShader = new GlassShader(mGVRContext);
@@ -127,7 +130,7 @@ public class ViewerMain extends GVRScript {
         mDiffuseShader2 = new DiffuseShader2(mGVRContext);
         mGlassShader2 = new GlassShader2(mGVRContext);
         mPhongShader2 = new PhongShader2(mGVRContext);
-        mPhongShader3 = new PhongShader3(mGVRContext);
+        mPhongShader3 = new PhongShader3(mGVRContext);*/
 
         GVRScene mainScene = mGVRContext.getNextMainScene();
 
@@ -150,7 +153,7 @@ public class ViewerMain extends GVRScript {
             GVRTexture env_tex = mGVRContext
                     .loadTexture(new GVRAndroidResource(mGVRContext, "env.jpg"));
             mReflectionMaterial = new GVRMaterial(mGVRContext,
-                    mReflectionShader.getShaderId());
+                    new GVRShaderId(ReflectionShader.class));
             mReflectionMaterial.setVec4(ReflectionShader.COLOR_KEY, 1.0f, 1.0f,
                     1.0f, 1.0f);
             mReflectionMaterial.setFloat(ReflectionShader.RADIUS_KEY, 10.0f);
@@ -159,14 +162,14 @@ public class ViewerMain extends GVRScript {
 
             // watch
             mMetalMaterial = new GVRMaterial(mGVRContext,
-                    mMetalOnlyShader.getShaderId());
+                    new GVRShaderId(MetalOnlyShader.class));
             mMetalMaterial.setVec4(MetalOnlyShader.COLOR_KEY, 1.7f, 1.4f, 1.0f,
                     1.0f);
             mMetalMaterial.setFloat(MetalOnlyShader.RADIUS_KEY, 10.0f);
             mMetalMaterial.setTexture(MetalOnlyShader.TEXTURE_KEY, env_tex);
 
             mGlassMaterial = new GVRMaterial(mGVRContext,
-                    mGlassShader.getShaderId());
+                    new GVRShaderId(GlassShader.class));
             mGlassMaterial.setVec4(GlassShader.COLOR_KEY, 1.0f, 1.0f, 1.0f,
                     1.0f);
             mGlassMaterial.setFloat(MetalOnlyShader.RADIUS_KEY, 10.0f);
@@ -176,14 +179,14 @@ public class ViewerMain extends GVRScript {
                     .loadTexture(new GVRAndroidResource(mGVRContext,
                             "watch/board.jpg"));
             mDiffuseMaterial = new GVRMaterial(mGVRContext,
-                    mDiffuseShader.getShaderId());
+                    new GVRShaderId(DiffuseShader.class));
             mDiffuseMaterial.setVec4(DiffuseShader.COLOR_KEY, 1.0f, 1.0f, 1.0f,
                     1.0f);
             mDiffuseMaterial.setTexture(DiffuseShader.TEXTURE_KEY, board_tex);
 
             // jar
             mPhongMaterial = new GVRMaterial(mGVRContext,
-                    mPhongShader.getShaderId());
+                    new GVRShaderId(PhongShader.class));
             mPhongMaterial.setVec4(PhongShader.COLOR_KEY, 1.2f, 1.2f, 1.3f,
                     1.0f);
             mPhongMaterial.setFloat(PhongShader.RADIUS_KEY, 10.0f);
@@ -194,21 +197,24 @@ public class ViewerMain extends GVRScript {
                     .loadTexture(new GVRAndroidResource(mGVRContext,
                             "car/body.jpg"));
             mDefaultColorTex = car_body_tex;
+            //mCarBodyMaterial = new GVRMaterial(mGVRContext,
+            //        mPhongShader3.getShaderId());
+
             mCarBodyMaterial = new GVRMaterial(mGVRContext,
-                    mPhongShader3.getShaderId());
+                    new GVRShaderId(PhongShader3.class));
             mCarBodyMaterial.setFloat(PhongShader3.RADIUS_KEY, 10.0f);
             mCarBodyMaterial.setTexture(PhongShader3.ENV_KEY, env_tex);
             mCarBodyMaterial.setTexture(PhongShader3.TEXTURE_KEY, car_body_tex);          
 
             mCarWheelMaterial = new GVRMaterial(mGVRContext,
-                    mMetalShader2.getShaderId());
+                    new GVRShaderId(MetalShader2.class));
             mCarWheelMaterial.setVec4(MetalShader2.COLOR_KEY, 1.2f, 1.2f, 1.2f,
                     1.0f);
             mCarWheelMaterial.setFloat(MetalShader2.RADIUS_KEY, 10.0f);
             mCarWheelMaterial.setTexture(MetalShader2.TEXTURE_KEY, env_tex);
 
             mCarGlassMaterial = new GVRMaterial(mGVRContext,
-                    mGlassShader2.getShaderId());
+                    new GVRShaderId(GlassShader2.class));
             mCarGlassMaterial.setVec4(GlassShader2.COLOR_KEY, 1.0f, 1.0f, 1.0f,
                     1.0f);
             mCarGlassMaterial.setFloat(GlassShader2.RADIUS_KEY, 10.0f);
@@ -218,7 +224,7 @@ public class ViewerMain extends GVRScript {
                     .loadTexture(new GVRAndroidResource(mGVRContext,
                             "car/default.png"));
             mCarTireMaterial = new GVRMaterial(mGVRContext,
-                    mDiffuseShader2.getShaderId());
+                    new GVRShaderId(DiffuseShader2.class));
             mCarTireMaterial.setVec4(DiffuseShader2.COLOR_KEY, 0.1f, 0.1f,
                     0.1f, 1.0f);
             mCarTireMaterial
@@ -228,7 +234,7 @@ public class ViewerMain extends GVRScript {
                     .loadTexture(new GVRAndroidResource(mGVRContext,
                             "car/back.jpg"));
             mCarBackMaterial = new GVRMaterial(mGVRContext,
-                    mDiffuseShader2.getShaderId());
+                    new GVRShaderId(DiffuseShader2.class));
             mCarBackMaterial.setVec4(DiffuseShader2.COLOR_KEY, 1.0f, 1.0f,
                     1.0f, 1.0f);
             mCarBackMaterial.setTexture(DiffuseShader2.TEXTURE_KEY, back_tex);
@@ -237,20 +243,20 @@ public class ViewerMain extends GVRScript {
                     .loadTexture(new GVRAndroidResource(mGVRContext,
                             "car/grill.jpg"));
             mCarGrillMaterial = new GVRMaterial(mGVRContext,
-                    mDiffuseShader2.getShaderId());
+                    new GVRShaderId(DiffuseShader2.class));
             mCarGrillMaterial.setVec4(DiffuseShader2.COLOR_KEY, 1.0f, 1.0f,
                     1.0f, 1.0f);
             mCarGrillMaterial.setTexture(DiffuseShader2.TEXTURE_KEY, grill_tex);
 
             mCarLightMaterial = new GVRMaterial(mGVRContext,
-                    mGlassShader2.getShaderId());
+                    new GVRShaderId(GlassShader2.class));
             mCarLightMaterial.setVec4(GlassShader2.COLOR_KEY, 2.5f, 2.5f, 2.5f,
                     1.0f);
             mCarLightMaterial.setFloat(GlassShader2.RADIUS_KEY, 10.0f);
             mCarLightMaterial.setTexture(GlassShader2.TEXTURE_KEY, env_tex);
 
             mCarInsideMaterial = new GVRMaterial(mGVRContext,
-                    mPhongShader2.getShaderId());
+                    new GVRShaderId(PhongShader2.class));
             mCarInsideMaterial.setVec4(PhongShader2.COLOR_KEY, 0.0f, 0.0f,
                     0.0f, 1.0f);
             mCarInsideMaterial.setFloat(PhongShader2.RADIUS_KEY, 10.0f);
@@ -261,28 +267,28 @@ public class ViewerMain extends GVRScript {
                     .loadTexture(new GVRAndroidResource(mGVRContext,
                             "robot/head.jpg"));
             mRobotHeadMaterial = new GVRMaterial(mGVRContext,
-                    mPhongShader3.getShaderId());
+                    new GVRShaderId(PhongShader3.class));
             mRobotHeadMaterial.setFloat(PhongShader3.RADIUS_KEY, 10.0f);
             mRobotHeadMaterial.setTexture(PhongShader3.ENV_KEY, env_tex);
             mRobotHeadMaterial.setTexture(PhongShader3.TEXTURE_KEY,
                     robot_head_tex);
 
             mRobotMetalMaterial = new GVRMaterial(mGVRContext,
-                    mMetalShader2.getShaderId());
+                    new GVRShaderId(MetalShader2.class));
             mRobotMetalMaterial.setVec4(MetalShader2.COLOR_KEY, 1.5f, 1.5f,
                     1.5f, 1.0f);
             mRobotMetalMaterial.setFloat(MetalShader2.RADIUS_KEY, 10.0f);
             mRobotMetalMaterial.setTexture(MetalShader2.TEXTURE_KEY, env_tex);
 
             mRobotBodyMaterial = new GVRMaterial(mGVRContext,
-                    mPhongShader2.getShaderId());
+                    new GVRShaderId(PhongShader2.class));
             mRobotBodyMaterial.setVec4(PhongShader2.COLOR_KEY, 1.0f, 1.0f,
                     1.0f, 1.0f);
             mRobotBodyMaterial.setFloat(PhongShader2.RADIUS_KEY, 10.0f);
             mRobotBodyMaterial.setTexture(PhongShader2.TEXTURE_KEY, env_tex);
 
             mRobotRubberMaterial = new GVRMaterial(mGVRContext,
-                    mDiffuseShader2.getShaderId());
+                    new GVRShaderId(DiffuseShader2.class));
             mRobotRubberMaterial.setVec4(DiffuseShader2.COLOR_KEY, 0.3f, 0.3f,
                     0.3f, 1.0f);
             mRobotRubberMaterial.setTexture(DiffuseShader2.TEXTURE_KEY,
@@ -294,13 +300,13 @@ public class ViewerMain extends GVRScript {
                     mGVRContext, "leaf/box.jpg"));
 
             mLeafBoxMaterial = new GVRMaterial(mGVRContext,
-                    mPhongShader3.getShaderId());
+                    new GVRShaderId(PhongShader3.class));
             mLeafBoxMaterial.setFloat(PhongShader3.RADIUS_KEY, 10.0f);
             mLeafBoxMaterial.setTexture(PhongShader3.ENV_KEY, env_tex);
             mLeafBoxMaterial.setTexture(PhongShader3.TEXTURE_KEY, leaf_box_tex);
 
             mLeafBodyMaterial = new GVRMaterial(mGVRContext,
-                    mMetalShader2.getShaderId());
+                    new GVRShaderId(MetalShader2.class));
             mLeafBodyMaterial.setVec4(MetalShader2.COLOR_KEY, 2.5f, 2.5f, 2.5f,
                     1.0f);
             mLeafBodyMaterial.setFloat(MetalShader2.RADIUS_KEY, 10.0f);
@@ -572,7 +578,7 @@ public class ViewerMain extends GVRScript {
             GVRRenderData ldata2 = new GVRRenderData(mGVRContext);
            
             mWidgetMaterial2 = new GVRMaterial(mGVRContext,
-                    mPhongShader3.getShaderId());
+                    new GVRShaderId(PhongShader3.class));
            
             ldata2.setMesh(widgetbutton2_mesh);
             ldata2.setMaterial(mWidgetMaterial2);
