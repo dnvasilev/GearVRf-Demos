@@ -93,8 +93,8 @@ public class GlassShader extends GVRShader {
             + "  gl_FragColor = vec4( color, 0.4 );\n" //
             + "}\n";
 
-   // private GVRCustomMaterialShaderId mShaderId;
-   // private GVRMaterialMap mCustomShader = null;
+    // private GVRCustomMaterialShaderId mShaderId;
+    // private GVRMaterialMap mCustomShader = null;
 
     public GlassShader(GVRContext gvrContext) {
         /*

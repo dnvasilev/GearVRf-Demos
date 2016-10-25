@@ -596,7 +596,7 @@ public class ViewerMain extends GVRScript {
 
             float[] matO = Objects[ThumbnailSelected].getTransform()
                     .getModelMatrix();
-            mWidgetMaterial = new GVRMaterial(gvrContext, GVRShaderType.UnlitFBO.ID);
+            mWidgetMaterial = new GVRMaterial(gvrContext, new GVRShaderId(PhongShader3.class));
             ldata.setMaterial(mWidgetMaterial);
             mWidgetMaterial.setMainTexture(mWidgetTexture);
             mWidgetMaterial.setVec4(PhongShader3.MAT1_KEY, matO[0], matO[4], matO[8],
@@ -611,7 +611,7 @@ public class ViewerMain extends GVRScript {
                     light[2]);
             mWidgetMaterial.setVec3(PhongShader3.EYE_KEY, eye[0], eye[1], eye[2]);
 
-            mWidgetMaterial2 = new GVRMaterial(gvrContext);
+            mWidgetMaterial2 = new GVRMaterial(gvrContext, new GVRShaderId(PhongShader3.class));
             mWidgetMaterial2.setMainTexture(mWidgetTexture);
             mWidgetMaterial2.setVec4(PhongShader3.MAT1_KEY, matO[0], matO[4],
                     matO[8], matO[12]);
