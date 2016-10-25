@@ -41,7 +41,7 @@ public class ReflectionShader extends GVRShader {
             + "precision mediump float;\n"
             + "in vec4 a_position;\n"
             + "in vec3 a_normal;\n"
-            + "in vec2 a_tex_coord;\n"
+            + "in vec2 a_texcoord;\n"
             + "uniform mat4 u_mvp;\n"
             + "uniform vec4 u_mat1;\n"
             + "uniform vec4 u_mat2;\n"
@@ -83,7 +83,7 @@ public class ReflectionShader extends GVRShader {
             + "  reflect_coord.y  = ray.y;\n"
             + "  reflect_coord.x = 0.5 + 0.6*asin(reflect_coord.x)/1.57079632675;\n"
             + "  reflect_coord.y = 0.5 + 0.6*asin(reflect_coord.y)/1.57079632675;\n"
-            + "  coord = a_tex_coord;\n"
+            + "  coord = a_texcoord;\n"
             + "  gl_Position = u_mvp*a_position;\n" //
             + "}\n";
 

@@ -33,12 +33,12 @@ public class ModelShader extends GVRShader{
     private static final String VERTEX_SHADER = "" //
             + "attribute vec4 a_position;\n"
             + "attribute vec4 a_normal;\n"
-            + "attribute vec2 a_tex_coord;\n"
+            + "attribute vec2 a_texcoord;\n"
             + "varying vec2 v_tex_coord;\n"
             + "uniform mat4 u_mvp;\n"
             + "uniform mat4 modelViewProjectionMatrix;\n"
             + "void main() {\n"
-            + "  v_tex_coord = a_tex_coord.xy;\n"
+            + "  v_tex_coord = a_texcoord.xy;\n"
             + "  gl_Position = modelViewProjectionMatrix * a_position;\n"
             + "}\n";
 
