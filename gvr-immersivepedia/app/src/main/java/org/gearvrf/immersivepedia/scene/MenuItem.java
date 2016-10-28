@@ -73,7 +73,7 @@ public class MenuItem extends FocusableSceneObject {
         super(gvrContext);
 
         attachRenderData(new GVRRenderData(gvrContext));
-        getRenderData().setMaterial(new GVRMaterial(gvrContext));
+        getRenderData().setMaterial(new GVRMaterial(gvrContext, GVRMaterial.GVRShaderType.Texture.ID));
         getRenderData().setMesh(gvrContext.createQuad(WIDTH, HEIGHT));
         GVRTexture texture = gvrContext.loadTexture(new GVRAndroidResource(gvrContext, R.drawable.empty_clickable));
         getRenderData().getMaterial().setMainTexture(texture);

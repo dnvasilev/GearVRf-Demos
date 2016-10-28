@@ -59,7 +59,7 @@ public class GazeController {
         highlightCursor.getRenderData().setDepthTest(false);
         highlightCursor.getRenderData().setRenderingOrder(CURSOR_RENDER_ORDER);
 
-        highlightCursor.getRenderData().getMaterial().setOpacity(0f);
+        highlightCursor.getRenderData().getMaterial().setOpacity(0.0f);
 
     }
 
@@ -79,11 +79,13 @@ public class GazeController {
         }
         gvrContext.getMainScene().getMainCameraRig().addChildObject(highlightCursor);
         gvrContext.getMainScene().getMainCameraRig().addChildObject(cursor);
+        gvrContext.getMainScene().bindShaders();
     }
 
     public static void disableGaze() {
         gvrContext.getMainScene().getMainCameraRig().removeChildObject(highlightCursor);
         gvrContext.getMainScene().getMainCameraRig().removeChildObject(cursor);
+        gvrContext.getMainScene().bindShaders();
     }
 
 }

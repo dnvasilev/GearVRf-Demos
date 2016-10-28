@@ -42,6 +42,7 @@ public class SkyBox {
     public GVRSphereSceneObject getSkyBox(GVRContext gvrContext, String skyBoxPath) {
         if (skyBoxModel == null) {
             skyBoxModel = loadSkyBoxModel(gvrContext, skyBoxPath, skyBoxName);
+            skyBoxModel.getRenderData().disableLight();
             return skyBoxModel;
         } else {
             return skyBoxModel;
@@ -67,6 +68,7 @@ public class SkyBox {
     public GVRSphereSceneObject getSkyBoxFromSD(GVRContext gvrContext, String skyBoxPath) {
         if (skyBoxModel == null) {
             skyBoxModel = loadSkyBoxModelFromSD(gvrContext, skyBoxPath, skyBoxName);
+            skyBoxModel.getRenderData().disableLight();
             return skyBoxModel;
         } else {
             return skyBoxModel;

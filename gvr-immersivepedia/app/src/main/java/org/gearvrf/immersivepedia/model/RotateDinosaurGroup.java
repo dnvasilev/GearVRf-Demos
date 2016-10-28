@@ -21,6 +21,7 @@ import org.gearvrf.GVRAndroidResource;
 import org.gearvrf.GVRContext;
 import org.gearvrf.GVRScene;
 import org.gearvrf.GVRSceneObject;
+import org.gearvrf.GVRTexture;
 import org.gearvrf.animation.GVRAnimation;
 import org.gearvrf.animation.GVRRotationByAxisAnimation;
 import org.gearvrf.immersivepedia.R;
@@ -113,18 +114,18 @@ public class RotateDinosaurGroup extends GVRSceneObject implements
             @Override
             public void lostFocus(FocusableSceneObject object) {
                 if (isPlayed) {
-                    renderTextureButton(PlayPauseButton.PAUSE_NORMAL, playPause);
+                    renderTextureButton(PlayPauseButton.pauseNormal /*PlayPauseButton.PAUSE_NORMAL*/, playPause);
                 } else {
-                    renderTextureButton(PlayPauseButton.PLAY_NORMAL, playPause);
+                    renderTextureButton(PlayPauseButton.playNormal/*PlayPauseButton.PLAY_NORMAL*/, playPause);
                 }
             }
 
             @Override
             public void inFocus(FocusableSceneObject object) {
                 if (isPlayed) {
-                    renderTextureButton(PlayPauseButton.PAUSE_HOVER, playPause);
+                    renderTextureButton(PlayPauseButton.pauseHover/*PlayPauseButton.PAUSE_HOVER*/, playPause);
                 } else {
-                    renderTextureButton(PlayPauseButton.PLAY_HOVER, playPause);
+                    renderTextureButton(PlayPauseButton.playHover/*PlayPauseButton.PLAY_HOVER*/, playPause);
                 }
             }
 
@@ -165,13 +166,18 @@ public class RotateDinosaurGroup extends GVRSceneObject implements
 		addChildObject(styrocosaurus);
 	}
 
-	public void renderTextureButton(String textureID, GVRSceneObject sceneObject) {
-		sceneObject
+	public void renderTextureButton(GVRTexture textureID, GVRSceneObject sceneObject) {
+/*		sceneObject
 				.getRenderData()
 				.getMaterial()
 				.setMainTexture(
 						sceneObject.getRenderData().getMaterial()
 								.getTexture(textureID));
+*/
+		sceneObject
+				.getRenderData()
+				.getMaterial()
+				.setMainTexture(textureID);
 	}
 
 	@Override
@@ -211,7 +217,7 @@ public class RotateDinosaurGroup extends GVRSceneObject implements
 	public void pauseAnimation() {
 		stopAnimation();
         final PlayPauseButton playPause = totem.getIcon();
-        renderTextureButton(PlayPauseButton.PLAY_NORMAL, playPause);
+        renderTextureButton(PlayPauseButton.playNormal/*PlayPauseButton.PLAY_NORMAL*/, playPause);
 		Log.e("test","pause: "+streamID);
 	}
 

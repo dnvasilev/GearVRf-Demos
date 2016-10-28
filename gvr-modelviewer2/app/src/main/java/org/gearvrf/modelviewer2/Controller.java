@@ -13,6 +13,7 @@ import org.gearvrf.GVRRenderData;
 import org.gearvrf.GVRRenderPass;
 import org.gearvrf.GVRScene;
 import org.gearvrf.GVRSceneObject;
+import org.gearvrf.GVRShaderId;
 import org.gearvrf.GVRTransform;
 import org.gearvrf.animation.GVRAnimation;
 import org.gearvrf.animation.GVRRepeatMode;
@@ -231,13 +232,13 @@ public class Controller {
             return;
         ArrayList<GVRRenderData> renderDatas = currentDisplayedModel.getModel(context)
                 .getAllComponents(GVRRenderData.getComponentType());
-        GVRMaterial outlineMaterial = new GVRMaterial(context);
+        GVRMaterial outlineMaterial = new GVRMaterial(context, new GVRShaderId(OutlineShader.class));
 
         switch (index) {
             case 0:
                 for (int i = 0; i < renderDatas.size(); i++) {
                     renderDatas.get(i).setMaterial(currentDisplayedModel.originalMaterial.get(i));
-                    renderDatas.get(i).setShaderTemplate(GVRPhongShader.class);
+                    //renderDatas.get(i).setShaderTemplate(GVRPhongShader.class);
                     renderDatas.get(i).setCullFace(GVRRenderPass.GVRCullFaceEnum.Back);
                     renderDatas.get(i).setDrawMode(4);
                     scene.bindShaders();
@@ -246,7 +247,8 @@ public class Controller {
                 break;
             case 1:
                 for (GVRRenderData rdata : renderDatas) {
-                    rdata.setShaderTemplate(NoTextureShader.class);
+                    rdata.setMaterial(new GVRMaterial(context, new GVRShaderId(NoTextureShader.class)));
+                    //rdata.setShaderTemplate(NoTextureShader.class);
                     rdata.setDrawMode(4);
                 }
                 break;
@@ -256,28 +258,34 @@ public class Controller {
                 outlineMaterial.setFloat(OutlineShader.THICKNESS_KEY, 2.0f);
                 for (GVRRenderData rdata : renderDatas) {
                     rdata.setMaterial(outlineMaterial);
-                    rdata.setShaderTemplate(OutlineShader.class);
+                    //rdata.setShaderTemplate(OutlineShader.class);
                     rdata.setCullFace(GVRRenderPass.GVRCullFaceEnum.Front);
                     rdata.setDrawMode(4);
                 }
                 break;
             case 3:
                 for (GVRRenderData rdata : renderDatas) {
-                    rdata.setShaderTemplate(GVRPhongShader.class);
+                    //rdata.setShaderTemplate(GVRPhongShader.class);
+                    rdata.setMaterial(new GVRMaterial(context,
+                            GVRMaterial.GVRShaderType.Phong.ID));
                     rdata.setDrawMode(1);
                 }
 
                 break;
             case 4:
                 for (GVRRenderData rdata : renderDatas) {
-                    rdata.setShaderTemplate(GVRPhongShader.class);
+                    //rdata.setShaderTemplate(GVRPhongShader.class);
+                    rdata.setMaterial(new GVRMaterial(context,
+                            GVRMaterial.GVRShaderType.Phong.ID));
                     rdata.setDrawMode(3);
                 }
 
                 break;
             case 5:
                 for (GVRRenderData rdata : renderDatas) {
-                    rdata.setShaderTemplate(GVRPhongShader.class);
+                    //rdata.setShaderTemplate(GVRPhongShader.class);
+                    rdata.setMaterial(new GVRMaterial(context,
+                            GVRMaterial.GVRShaderType.Phong.ID));
                     rdata.setDrawMode(0);
                 }
 

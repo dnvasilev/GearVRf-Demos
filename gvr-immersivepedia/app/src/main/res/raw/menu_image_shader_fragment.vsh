@@ -3,7 +3,7 @@ varying vec2  coord;
 uniform sampler2D state1;
 uniform sampler2D state2;
 uniform float textureSwitch;
-uniform float opacity;
+uniform float u_opacity;
 
 void main() {
 	vec4 texture;
@@ -14,5 +14,5 @@ void main() {
 	}
 		
 	gl_FragColor = texture;
-	gl_FragColor.a = gl_FragColor.a * opacity;
+	gl_FragColor.a = gl_FragColor.a * u_opacity;
 }

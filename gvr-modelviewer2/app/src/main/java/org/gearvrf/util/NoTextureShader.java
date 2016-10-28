@@ -13,20 +13,31 @@ package org.gearvrf.util;
 
 import org.gearvrf.GVRContext;
 import org.gearvrf.GVRPhongShader;
+import org.gearvrf.GVRShader;
+import org.gearvrf.GVRShaderData;
 import org.gearvrf.modelviewer2.R;
 import org.gearvrf.utility.TextFile;
 
 import android.content.Context;
 
-public class NoTextureShader extends GVRPhongShader {
+public class NoTextureShader extends GVRShader {
     private static String surfShader = null;
 
     public NoTextureShader(GVRContext gvrContext) {
-        super(gvrContext);
+        super("", "", "", 300);
+        //super(gvrContext);
         if (surfShader == null) {
             Context context = gvrContext.getContext();
             surfShader = TextFile.readTextFile(context, R.raw.notexture_surface);
             setSegment("FragmentSurface", surfShader);
         }
+        //setSegment("VertexTemplate", VERTEX_SHADER);
+    }
+
+
+    protected void setMaterialDefaults(GVRShaderData material) {
+        //material.setVec4("u_color", 1, 1, 1, 1);
+        //material.setFloat("u_thickness", 1);
     }
 }
+

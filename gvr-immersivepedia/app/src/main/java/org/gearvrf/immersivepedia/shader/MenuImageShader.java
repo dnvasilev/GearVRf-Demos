@@ -47,7 +47,7 @@ public class MenuImageShader extends GVRShader {
         mCustomShader.addUniformFloatKey("opacity", "opacity");
 */
 
-        super("float textureSwitch float opacity", "sampler2D state1 sampler2D state2 ", "float4 a_position, float3 a_normal, float2 a_tex_coord");
+        super("float textureSwitch float u_opacity", "sampler2D state1 sampler2D state2 ", "float4 a_position, float3 a_normal, float2 a_tex_coord");
 
         Context context = gvrContext.getContext();
         setSegment("FragmentTemplate", TextFile.readTextFile(context, R.raw.menu_image_shader_fragment));
@@ -58,6 +58,6 @@ public class MenuImageShader extends GVRShader {
     protected void setMaterialDefaults(GVRShaderData material)
     {
         material.setFloat("textureSwitch", 1);
-        material.setFloat("opacity", 1);
+        material.setFloat("u_opacity", 1);
     }
 }

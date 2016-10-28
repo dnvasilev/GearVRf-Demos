@@ -47,7 +47,7 @@ public class LoadComponent extends GVRSceneObject implements FocusListener {
     private LoadComponentListener componentListener;
     private boolean isLoading = false;
 
-    public LoadComponent(GVRContext gvrContext, LoadComponentListener componentListener) {
+    public LoadComponent(final GVRContext gvrContext, LoadComponentListener componentListener) {
         super(gvrContext);
         this.componentListener = componentListener;
         this.gvrContext = gvrContext;
@@ -65,7 +65,9 @@ public class LoadComponent extends GVRSceneObject implements FocusListener {
     private void createLoadComponent() {
         circleAlpha = new GVRSceneObject(gvrContext, gvrContext.createQuad(.5f, .5f),
                 circleAlphaTexture);
+
         plus = new GVRSceneObject(gvrContext, gvrContext.createQuad(.5f, .5f), plusTexture);
+
         circle = new FocusableSceneObject(gvrContext, gvrContext.createQuad(.5f, .5f),
                 circleTexture);
 
@@ -89,6 +91,7 @@ public class LoadComponent extends GVRSceneObject implements FocusListener {
         addChildObject(circleAlpha);
         addChildObject(plus);
         addChildObject(circle);
+        gvrContext.getMainScene().bindShaders(this);
     }
 
     private void loadTexture() {

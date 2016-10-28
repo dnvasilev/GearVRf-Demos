@@ -69,8 +69,8 @@ public class SampleMain extends GVRMain {
         /*
          * Add a root node with four geometric shapes as children
          */
-        GVRMaterial red = new GVRMaterial(gvrContext);
-        GVRMaterial blue = new GVRMaterial(gvrContext);
+        GVRMaterial red = new GVRMaterial(gvrContext, GVRMaterial.GVRShaderType.Phong.ID);
+        GVRMaterial blue = new GVRMaterial(gvrContext, GVRMaterial.GVRShaderType.Phong.ID);
         GVRSceneObject root = new GVRSceneObject(gvrContext);
         GVRCubeSceneObject cube = new GVRCubeSceneObject(gvrContext, true, red);
         GVRSphereSceneObject sphere = new GVRSphereSceneObject(gvrContext, true, blue);
@@ -81,12 +81,12 @@ public class SampleMain extends GVRMain {
         red.setDiffuseColor(1,  0,  0, 1);
         blue.setDiffuseColor(0, 0,  1, 1);
         cube.setName("cube");
-        cube.getRenderData().setShaderTemplate(GVRPhongShader.class);
+        //cube.getRenderData().setShaderTemplate(GVRPhongShader.class);
         sphere.setName("sphere");
         sphere.getRenderData().setShaderTemplate(GVRPhongShader.class);
-        cylinder.getRenderData().setShaderTemplate(GVRPhongShader.class);
+        //cylinder.getRenderData().setShaderTemplate(GVRPhongShader.class);
         cylinder.setName("cylinder");
-        cone.getRenderData().setShaderTemplate(GVRPhongShader.class);
+        //cone.getRenderData().setShaderTemplate(GVRPhongShader.class);
         cone.setName("cone");
         root.addChildObject(cube);
         root.addChildObject(sphere);

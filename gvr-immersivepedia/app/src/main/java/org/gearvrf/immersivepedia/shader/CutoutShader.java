@@ -28,7 +28,7 @@ import org.gearvrf.utility.TextFile;
 
 public class CutoutShader extends GVRShader{
 
-    public static final String TEXTURE_KEY = "texture";
+    public static final String TEXTURE_KEY = "u_texture";
     public static final String CUTOUT = "cutout";
 
     //private GVRCustomMaterialShaderId mShaderId;
@@ -41,7 +41,7 @@ public class CutoutShader extends GVRShader{
         mCustomShader = shaderManager.getShaderMap(mShaderId);
         mCustomShader.addTextureKey("texture", TEXTURE_KEY);
         mCustomShader.addUniformFloatKey("cutout", CUTOUT);*/
-        super("float cutout", "sampler2D texture", "float4 a_position, float3 a_normal, float2 a_tex_coord");
+        super("float cutout", "sampler2D u_texture", "float4 a_position, float3 a_normal, float2 a_tex_coord");
 
         Context context = gvrContext.getContext();
         setSegment("FragmentTemplate", TextFile.readTextFile(context, R.raw.cutout_fragment));

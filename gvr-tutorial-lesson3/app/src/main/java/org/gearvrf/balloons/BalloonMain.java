@@ -113,7 +113,7 @@ public class BalloonMain extends GVRMain {
         sphere.attachComponent(collider);
         mtl.setDiffuseColor(1.0f, 0.0f, 1.0f, 0.5f);
         sphere.setName("balloon");
-        rdata.setShaderTemplate(GVRPhongShader.class);
+        //rdata.setShaderTemplate(GVRPhongShader.class);
         rdata.setAlphaBlend(true);
         rdata.setMaterial(mtl);
         rdata.setRenderingOrder(GVRRenderingOrder.TRANSPARENT);

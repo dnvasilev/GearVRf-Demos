@@ -352,6 +352,7 @@ public class ViewerMain extends GVRScript {
             Objects[2].getTransform().setPosition(0.0f, 0.0f, -EYE_TO_OBJECT);
             mainScene.addSceneObject(Objects[2]);
 
+
             // --------------jar
 
             GVRSceneObject obj5 = new GVRSceneObject(mGVRContext);
@@ -449,7 +450,7 @@ public class ViewerMain extends GVRScript {
             Objects[3].getTransform().setPosition(0.5f, -1.0f,
                     -EYE_TO_OBJECT - 5.0f);
     
-            mainScene.addSceneObject(Objects[3]);        
+            mainScene.addSceneObject(Objects[3]);
 
             GVRSceneObject obj15 = new GVRSceneObject(mGVRContext);
             GVRRenderData renderData15 = new GVRRenderData(mGVRContext);
@@ -553,21 +554,21 @@ public class ViewerMain extends GVRScript {
             GVRMesh board_mesh = mGVRContext.loadMesh(new GVRAndroidResource(
                     mGVRContext, "board.obj"));
             GVRMesh picks_mesh = mGVRContext.loadMesh(new GVRAndroidResource(
-                    mGVRContext, "pick.obj"));           
+                    mGVRContext, "pick.obj"));
             GVRMesh button_pick_mesh = mGVRContext
                     .loadMesh(new GVRAndroidResource(mGVRContext, "button.obj"));
             GVRMesh widgetbutton2_mesh = mGVRContext
-                    .loadMesh(new GVRAndroidResource(mGVRContext, "button2.obj"));          
-          
+                    .loadMesh(new GVRAndroidResource(mGVRContext, "button2.obj"));
+
             mWidgetTexture = new GVRSharedTexture(gvrContext, mPlugin.getTextureId());
 
-            GVRWidgetSceneObjectMeshInfo info = 
+            GVRWidgetSceneObjectMeshInfo info =
                     new GVRWidgetSceneObjectMeshInfo(-2.5f,1.0f,-1.5f,-1.0f,new int[] { 0, 0 },new int[] { 1280, 1440 });
-       
+
 
             GVRWidgetSceneObjectMeshInfo info2 =
                     new GVRWidgetSceneObjectMeshInfo(1.5f,1.0f,2.5f,-1.0f,new int[] { 1281, 0 },new int[] { 2560, 1440 });
-          
+
             mWidgetButtonObject = new GVRWidgetSceneObject(mGVRContext,
                     mPlugin.getTextureId(), info, mPlugin.getWidth(),
                     mPlugin.getHeight());
@@ -576,10 +577,10 @@ public class ViewerMain extends GVRScript {
                     mPlugin.getHeight());
             GVRRenderData ldata = new GVRRenderData(mGVRContext);
             GVRRenderData ldata2 = new GVRRenderData(mGVRContext);
-           
+
             mWidgetMaterial2 = new GVRMaterial(mGVRContext,
                     new GVRShaderId(PhongShader3.class));
-           
+
             ldata2.setMesh(widgetbutton2_mesh);
             ldata2.setMaterial(mWidgetMaterial2);
             float[] light = new float[4];
@@ -592,13 +593,16 @@ public class ViewerMain extends GVRScript {
             eye[0] = 0.0f;
             eye[1] = 0.0f;
             eye[2] = 3.0f * EYE_TO_OBJECT;
+
             eye[3] = 1.0f;
 
             float[] matO = Objects[ThumbnailSelected].getTransform()
                     .getModelMatrix();
             mWidgetMaterial = new GVRMaterial(gvrContext, new GVRShaderId(PhongShader3.class));
-            ldata.setMaterial(mWidgetMaterial);
-            mWidgetMaterial.setMainTexture(mWidgetTexture);
+            //mWidgetMaterial = new GVRMaterial(gvrContext, GVRShaderType.UnlitFBO.ID);
+
+           // mWidgetMaterial.setMainTexture(mWidgetTexture);
+            mWidgetMaterial.setTexture("intexture", mWidgetTexture);
             mWidgetMaterial.setVec4(PhongShader3.MAT1_KEY, matO[0], matO[4], matO[8],
                     matO[12]);
             mWidgetMaterial.setVec4(PhongShader3.MAT2_KEY, matO[1], matO[5], matO[9],
@@ -611,8 +615,11 @@ public class ViewerMain extends GVRScript {
                     light[2]);
             mWidgetMaterial.setVec3(PhongShader3.EYE_KEY, eye[0], eye[1], eye[2]);
 
+            ldata.setMaterial(mWidgetMaterial);
+
             mWidgetMaterial2 = new GVRMaterial(gvrContext, new GVRShaderId(PhongShader3.class));
-            mWidgetMaterial2.setMainTexture(mWidgetTexture);
+            //mWidgetMaterial2.setMainTexture(mWidgetTexture);
+            mWidgetMaterial2.setTexture("intexture", mWidgetTexture);
             mWidgetMaterial2.setVec4(PhongShader3.MAT1_KEY, matO[0], matO[4],
                     matO[8], matO[12]);
             mWidgetMaterial2.setVec4(PhongShader3.MAT2_KEY, matO[1], matO[5],
@@ -636,9 +643,10 @@ public class ViewerMain extends GVRScript {
                     -EYE_TO_OBJECT - 1.5f);
             mWdgetButtonObject2.getTransform().rotateByAxis(-40.0f, 0.0f, 1.0f,
                     0.0f);
-            mWdgetButtonObject2.getRenderData().setRenderingOrder(100000 - 1);           
-            mainScene.addSceneObject(mWidgetButtonObject); 
-            
+            mWdgetButtonObject2.getRenderData().setRenderingOrder(100000 - 1);
+            mainScene.addSceneObject(mWidgetButtonObject);
+
+
             GVREyePointeeHolder eyePointeeHolder2 = new GVREyePointeeHolder(
                     gvrContext);
             GVRMeshEyePointee eyePointee2 = new GVRMeshEyePointee(gvrContext,
@@ -796,31 +804,31 @@ public class ViewerMain extends GVRScript {
                 case 1:
                     mCarBodyMaterial.setTexture(PhongShader3.TEXTURE_KEY,
                             mDefaultColorTex);
-                    mPhongMaterial.setTexture(PhongShader3.TEXTURE_KEY,
+                    mPhongMaterial.setTexture(PhongShader.TEXTURE_KEY,
                             mDefaultColorTex);
                     break;
                 case 2:
                     mCarBodyMaterial.setTexture(PhongShader3.TEXTURE_KEY,
                             mBlackTex);
-                    mPhongMaterial.setTexture(PhongShader3.TEXTURE_KEY,
+                    mPhongMaterial.setTexture(PhongShader.TEXTURE_KEY,
                             mBlackTex);
                     break;
                 case 3:
                     mCarBodyMaterial.setTexture(PhongShader3.TEXTURE_KEY,
                             mBlueTex);
-                    mPhongMaterial.setTexture(PhongShader3.TEXTURE_KEY,
+                    mPhongMaterial.setTexture(PhongShader.TEXTURE_KEY,
                             mBlueTex);
                     break;
                 case 4:
                     mCarBodyMaterial.setTexture(PhongShader3.TEXTURE_KEY,
                             mGreenTex);
-                    mPhongMaterial.setTexture(PhongShader3.TEXTURE_KEY,
+                    mPhongMaterial.setTexture(PhongShader.TEXTURE_KEY,
                             mGreenTex);
                     break;
                 case 5:
                     mCarBodyMaterial.setTexture(PhongShader3.TEXTURE_KEY,
                             mSilverTex);
-                    mPhongMaterial.setTexture(PhongShader3.TEXTURE_KEY,
+                    mPhongMaterial.setTexture(PhongShader.TEXTURE_KEY,
                             mSilverTex);
                     break;
 

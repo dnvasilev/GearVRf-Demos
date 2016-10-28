@@ -24,17 +24,17 @@ import org.gearvrf.immersivepedia.focus.FocusableSceneObject;
 
 public class PlayPauseButton extends FocusableSceneObject {
 
-    public static final String PAUSE_HOVER = "inactive_pause";
-    public static final String PAUSE_NORMAL = "normal_pause";
+    public static final String PAUSE_HOVER = "u_texture"; //"inactive_pause";
+    public static final String PAUSE_NORMAL = "u_texture"; //"normal_pause";
 
-    public static final String PLAY_HOVER = "inactive_play";
-    public static final String PLAY_NORMAL = "normal_play";
+    public static final String PLAY_HOVER = "u_texture"; //"inactive_play";
+    public static final String PLAY_NORMAL = "u_texture"; //"normal_play";
 
-    private GVRTexture pauseHover;
-    private GVRTexture pauseNormal;
+    public static GVRTexture pauseHover;
+    public static GVRTexture pauseNormal;
 
-    private GVRTexture playHover;
-    private GVRTexture playNormal;
+    public static GVRTexture playHover;
+    public static GVRTexture playNormal;
     private GVRContext gvrContext;
 
     public PlayPauseButton(GVRContext gvrContext, float f, float g, GVRTexture t) {
