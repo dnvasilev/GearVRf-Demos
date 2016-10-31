@@ -61,16 +61,16 @@ public class ButtonBoard extends GVRSceneObject {
         playPauseButton.getRenderData().setRenderingOrder(RenderingOrderApplication.BUTTON_BOARD + 1);
         playPauseButton.getTransform().setPosition(PLAY_PAUSE_X_POSITION, PLAY_PAUSE_Y_POSITION, PLAY_PAUSE_Z_POSITION);
         playPauseButton.attachEyePointeeHolder();
-        renderTextureButton(PlayPauseButton.PAUSE_NORMAL, playPauseButton);
+        renderTextureButton(PlayPauseButton.pauseNormal, playPauseButton);
         playPauseButton.focusListener = new FocusListener() {
 
             @Override
             public void lostFocus(FocusableSceneObject object) {
 
                 if (videoComponent.isPlaying()) {
-                    renderTextureButton(PlayPauseButton.PAUSE_NORMAL, playPauseButton);
+                    renderTextureButton(PlayPauseButton.pauseNormal, playPauseButton);
                 } else {
-                    renderTextureButton(PlayPauseButton.PLAY_NORMAL, playPauseButton);
+                    renderTextureButton(PlayPauseButton.playNormal, playPauseButton);
                 }
             }
 
@@ -78,9 +78,9 @@ public class ButtonBoard extends GVRSceneObject {
             public void inFocus(FocusableSceneObject object) {
 
                 if (videoComponent.isPlaying()) {
-                    renderTextureButton(PlayPauseButton.PAUSE_HOVER, playPauseButton);
+                    renderTextureButton(PlayPauseButton.pauseHover, playPauseButton);
                 } else {
-                    renderTextureButton(PlayPauseButton.PLAY_HOVER, playPauseButton);
+                    renderTextureButton(PlayPauseButton.playHover, playPauseButton);
                 }
 
             }
@@ -124,20 +124,28 @@ public class ButtonBoard extends GVRSceneObject {
 
             @Override
             public void finished(GVRAnimation animation) {
-                renderTextureButton(PlayPauseButton.PAUSE_NORMAL, playPauseButton);
+                renderTextureButton(PlayPauseButton.pauseNormal, playPauseButton);
             }
         });
     }
 
     public void turnOnGUIButtonUpdatingTexture() {
         turnOnGUIButton();
-        renderTextureButton(PlayPauseButton.PLAY_NORMAL, playPauseButton);
+        renderTextureButton(PlayPauseButton.playNormal, playPauseButton);
     }
 
-    public void renderTextureButton(String textureID, GVRSceneObject sceneObject) {
-
-        sceneObject.getRenderData().getMaterial()
-                .setMainTexture(sceneObject.getRenderData().getMaterial().getTexture(textureID));
+    public void renderTextureButton(GVRTexture textureID, GVRSceneObject sceneObject) {
+/*		sceneObject
+				.getRenderData()
+				.getMaterial()
+				.setMainTexture(
+						sceneObject.getRenderData().getMaterial()
+								.getTexture(textureID));
+*/
+        sceneObject
+                .getRenderData()
+                .getMaterial()
+                .setMainTexture(textureID);
     }
 
     public void closeAction() {

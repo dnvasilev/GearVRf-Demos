@@ -51,7 +51,7 @@ public class VideoComponent extends GVRSceneObject {
     private FocusableSceneObject focus;
 
     public VideoComponent(GVRContext gvrContext, float WIDTH, float HEIGHT) {
-        super(gvrContext, WIDTH, HEIGHT);
+        super(gvrContext, 0, 0);
 
         this.gvrContext = gvrContext;
 
@@ -59,7 +59,7 @@ public class VideoComponent extends GVRSceneObject {
         createVideo();
         createSeekbar();
         createButtonBoard();
-
+        gvrContext.getMainScene().bindShaders(this);
         mediaPlayer.start();
     }
 
@@ -82,6 +82,7 @@ public class VideoComponent extends GVRSceneObject {
 
         mediaPlayer = MediaPlayer.create(gvrContext.getContext(), R.raw.dinos_videos_wip);
         video = new GVRVideoSceneObject(gvrContext, WIDTH, HEIGHT, mediaPlayer, GVRVideoType.MONO);
+
         focus = new FocusableSceneObject(gvrContext, WIDTH, HEIGHT, gvrContext.loadTexture(new GVRAndroidResource(gvrContext,
                 R.drawable.empty_clickable)));
         focus.attachEyePointeeHolder();
@@ -131,6 +132,7 @@ public class VideoComponent extends GVRSceneObject {
 
         addChildObject(video);
         addChildObject(focus);
+
     }
 
     private void setVideoAttribute() {
