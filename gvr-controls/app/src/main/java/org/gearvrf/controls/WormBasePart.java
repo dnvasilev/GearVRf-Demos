@@ -19,6 +19,7 @@ import org.gearvrf.GVRAndroidResource;
 import org.gearvrf.GVRContext;
 import org.gearvrf.GVRMesh;
 import org.gearvrf.GVRSceneObject;
+import org.gearvrf.GVRShaderId;
 import org.gearvrf.GVRTexture;
 import org.gearvrf.controls.anim.AnimationsTime;
 import org.gearvrf.controls.animation.GVRColorSwapAnimation;
@@ -53,8 +54,7 @@ public class WormBasePart extends GVRSceneObject {
         GVRTexture texture = gvrContext.loadTexture(
                 new GVRAndroidResource(gvrContext, textureResId));
 
-        segment = new GVRSceneObject(gvrContext, mesh, texture, new ColorSwapShader(
-                getGVRContext()).getShaderId());
+        segment = new GVRSceneObject(gvrContext, mesh, texture, new GVRShaderId(ColorSwapShader.class));
 
         segment.getRenderData().setRenderingOrder(RenderingOrder.WORM);
 

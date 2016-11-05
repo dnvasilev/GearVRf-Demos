@@ -19,12 +19,14 @@ import org.gearvrf.GVRContext;
 import org.gearvrf.GVRMaterial;
 import org.gearvrf.GVRMesh;
 import org.gearvrf.GVRRenderData;
+import org.gearvrf.GVRShaderId;
 import org.gearvrf.GVRTexture;
 import org.gearvrf.animation.GVROpacityAnimation;
 import org.gearvrf.animation.GVRRepeatMode;
 import org.gearvrf.controls.R;
 import org.gearvrf.controls.focus.ControlSceneObject;
 import org.gearvrf.controls.shaders.ButtonShader;
+import org.gearvrf.controls.shaders.ColorSwapShader;
 import org.gearvrf.controls.util.RenderingOrder;
 
 public class MenuCloseButton extends ControlSceneObject {
@@ -42,7 +44,7 @@ public class MenuCloseButton extends ControlSceneObject {
         GVRMesh sMesh = getGVRContext().createQuad(0.4f, 0.4f);
 
         attachRenderData(new GVRRenderData(gvrContext));
-        getRenderData().setMaterial(new GVRMaterial(gvrContext, new ButtonShader(gvrContext).getShaderId()));
+        getRenderData().setMaterial(new GVRMaterial(gvrContext, new GVRShaderId(ButtonShader.class)));
         getRenderData().setMesh(sMesh);
         createTextures(gvrContext);
 

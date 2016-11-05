@@ -20,9 +20,11 @@ import org.gearvrf.GVRMaterial;
 import org.gearvrf.GVRMesh;
 import org.gearvrf.GVRRenderData;
 import org.gearvrf.GVRSceneObject;
+import org.gearvrf.GVRShaderId;
 import org.gearvrf.GVRTexture;
 import org.gearvrf.controls.R;
 import org.gearvrf.controls.menu.MenuControlSceneObject;
+import org.gearvrf.controls.shaders.ButtonShader;
 import org.gearvrf.controls.shaders.ColorSwapShader;
 import org.gearvrf.controls.util.ColorControls.Color;
 import org.gearvrf.controls.util.RenderingOrder;
@@ -45,7 +47,7 @@ public class ColorsButton extends MenuControlSceneObject {
 
         attachRenderData(new GVRRenderData(gvrContext));
         getRenderData().setMaterial(
-                new GVRMaterial(gvrContext, new ColorSwapShader(gvrContext).getShaderId()));
+                new GVRMaterial(gvrContext, new GVRShaderId(ColorSwapShader.class)));
         getRenderData().setMesh(sMesh);
 
         setTextures(gvrContext);
