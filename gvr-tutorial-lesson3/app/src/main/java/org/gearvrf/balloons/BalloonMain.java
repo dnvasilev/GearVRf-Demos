@@ -106,7 +106,7 @@ public class BalloonMain extends GVRMain {
     {
         GVRSceneObject sphere = new GVRSphereSceneObject(context, true);
         GVRRenderData rdata = sphere.getRenderData();
-        GVRMaterial mtl = new GVRMaterial(context);
+        GVRMaterial mtl = new GVRMaterial(context, GVRMaterial.GVRShaderType.Phong.ID);
         GVRSphereCollider collider = new GVRSphereCollider(context);
 
         collider.setRadius(1.0f);
