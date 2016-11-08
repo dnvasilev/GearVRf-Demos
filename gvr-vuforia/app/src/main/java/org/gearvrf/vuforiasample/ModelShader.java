@@ -31,23 +31,27 @@ public class ModelShader extends GVRShader{
     public static final String MVP_KEY = "modelViewProjectionMatrix";
 
     private static final String VERTEX_SHADER = "" //
-            + "attribute vec4 a_position;\n"
-            + "attribute vec4 a_normal;\n"
-            + "attribute vec2 a_texcoord;\n"
-            + "varying vec2 v_tex_coord;\n"
-            + "uniform mat4 u_mvp;\n"
-            + "uniform mat4 modelViewProjectionMatrix;\n"
+            + "#version 300 es \n"
+            + "in vec4 a_position;\n"
+            + "in vec4 a_normal;\n"
+            + "in vec2 a_texcoord;\n"
+            + "out vec2 v_tex_coord;\n"
+            + "layout (std140) uniform Material_ubo{\n"
+            + "mat4 modelViewProjectionMatrix;\n"
+            +" }\n"
             + "void main() {\n"
             + "  v_tex_coord = a_texcoord.xy;\n"
             + "  gl_Position = modelViewProjectionMatrix * a_position;\n"
             + "}\n";
 
     private static final String FRAGMENT_SHADER = "" //
+            + "#version 300 es \n"
             + "precision highp float;\n"
-            + "varying vec2 v_tex_coord; \n"
+            + "in vec2 v_tex_coord; \n"
             + "uniform sampler2D texSampler2D;\n"
+            + "out vec4 outColor; \n"
             + "void main() {\n"
-            + "  gl_FragColor = texture2D(texSampler2D, v_tex_coord);\n"
+            + "  outColor = texture(texSampler2D, v_tex_coord);\n"
             + "}\n";
 
     //private GVRCustomMaterialShaderId mShaderId;
