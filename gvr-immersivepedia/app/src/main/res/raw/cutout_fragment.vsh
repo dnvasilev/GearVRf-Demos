@@ -1,17 +1,24 @@
+#version 300 es
 precision mediump float;
-varying vec2  coord;
+in vec2  coord;
 uniform sampler2D u_texture;
-uniform float cutout;
+
+layout (std140) uniform Material_ubo{
+    vec4 cutout;
+};
+
+out vec4 outColor;
+
 void main() {
-	
+
 	vec4 color;	
-	color = texture2D(u_texture, coord);
+	color = texture(u_texture, coord);
 	
-	if(color.r < cutout){
-		gl_FragColor = vec4(0,0,0,color.a);
+	if(color.r < cutout.x){
+		outColor = vec4(0,0,0,color.a);
 	}else{
-		gl_FragColor = vec4(0,0,0,0);
+		outColor = vec4(0,0,0,0);
 	}
 	if(color.a < 1.0)
-		gl_FragColor = vec4(0,0,0,0);	
+		outColor = vec4(0,0,0,0);
 }

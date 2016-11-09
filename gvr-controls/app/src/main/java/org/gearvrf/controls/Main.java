@@ -25,6 +25,7 @@ import org.gearvrf.GVRRenderPass.GVRCullFaceEnum;
 import org.gearvrf.GVRScene;
 import org.gearvrf.GVRSceneObject;
 import org.gearvrf.GVRMain;
+import org.gearvrf.GVRShaderId;
 import org.gearvrf.GVRTexture;
 import org.gearvrf.GVRTextureParameters;
 import org.gearvrf.GVRTextureParameters.TextureFilterType;
@@ -213,7 +214,7 @@ public class Main extends GVRMain {
                 new GVRAndroidResource(mGVRContext, R.drawable.ground_512), parameters);
 
         ground = new GVRSceneObject(mGVRContext, mesh, texture,
-                new TileShader(mGVRContext).getShaderId());
+                new GVRShaderId(TileShader.class));
         ground.getTransform().setPositionY(GROUND_Y_POSITION);
         ground.getTransform().setScale(SCENE_SIZE, SCENE_SIZE, SCENE_SIZE);
         ground.getTransform().setRotationByAxis(-45, 0, 0, 1);

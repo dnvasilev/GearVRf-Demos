@@ -30,8 +30,8 @@ public class KeyboardSoftItem extends KeyboardItemBase {
 
         this.keyboardCharItem = mCharItem;
         
-        TransparentButtonShaderThreeStates dif = new TransparentButtonShaderThreeStates(gvrContext);
-        createTextures(dif);
+        //TransparentButtonShaderThreeStates dif = new TransparentButtonShaderThreeStates(gvrContext);
+        createTextures();
 
         configureTextures();
     }

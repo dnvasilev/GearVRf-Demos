@@ -25,6 +25,7 @@ import org.gearvrf.GVRMaterial;
 import org.gearvrf.GVRMesh;
 import org.gearvrf.GVRRenderData;
 import org.gearvrf.GVRSceneObject;
+import org.gearvrf.GVRShaderId;
 import org.gearvrf.GVRTexture;
 import org.gearvrf.animation.GVRAnimation;
 import org.gearvrf.animation.GVRInterpolator;
@@ -85,8 +86,8 @@ public class Apple extends GVRSceneObject {
         GVRMesh mesh = gvrContext.loadMesh(new GVRAndroidResource(gvrContext,
                 R.raw.apple));
 
-        ColorSwapShader shader = new ColorSwapShader(gvrContext);
-        GVRMaterial material = new GVRMaterial(gvrContext, shader.getShaderId());
+        //ColorSwapShader shader = new ColorSwapShader(gvrContext);
+        GVRMaterial material = new GVRMaterial(gvrContext, new GVRShaderId(ColorSwapShader.class));
         GVRRenderData renderData = new GVRRenderData(gvrContext);
         renderData.setMesh(mesh);
         renderData.setMaterial(material);

@@ -1,18 +1,24 @@
+#version 300 es
 precision mediump float;
-varying vec2  coord;
+in vec2  coord;
 uniform sampler2D state1;
 uniform sampler2D state2;
-uniform float textureSwitch;
-uniform float u_opacity;
+
+layout (std140) uniform Material_ubo{
+    vec4 textureSwitch;
+    vec4 u_opacity;
+};
+
+out vec4 outColor;
 
 void main() {
-	vec4 texture;
-	if(textureSwitch == 0.0) {
-		texture = texture2D(state1, coord);
+	vec4 textureColor;
+	if(textureSwitch.x == 0.0) {
+		textureColor = texture(state1, coord);
 	} else {
-		texture = texture2D(state2, coord);
+		textureColor = texture(state2, coord);
 	}
 		
-	gl_FragColor = texture;
-	gl_FragColor.a = gl_FragColor.a * u_opacity;
+	outColor = textureColor;
+	outColor.a = outColor.a * u_opacity.x;
 }

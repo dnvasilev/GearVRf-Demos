@@ -35,6 +35,7 @@ import org.gearvrf.GVRContext;
 import org.gearvrf.GVRMaterial;
 import org.gearvrf.GVRMesh;
 import org.gearvrf.GVRRenderData;
+import org.gearvrf.GVRShaderId;
 import org.gearvrf.controls.R;
 import org.gearvrf.controls.menu.MenuControlSceneObject;
 import org.gearvrf.controls.shaders.ButtonShader;
@@ -67,7 +68,7 @@ public class AnimCleanButton extends MenuControlSceneObject {
 
         attachRenderData(new GVRRenderData(gvrContext));
         getRenderData().setMaterial(
-                new GVRMaterial(gvrContext, new ButtonShader(gvrContext).getShaderId()));
+                new GVRMaterial(gvrContext, new GVRShaderId(ButtonShader.class)));
         getRenderData().setMesh(sMesh);
 
         createTextures();

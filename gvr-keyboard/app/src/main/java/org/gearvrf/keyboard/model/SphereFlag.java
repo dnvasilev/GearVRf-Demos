@@ -25,6 +25,7 @@ import org.gearvrf.GVRContext;
 import org.gearvrf.GVRMaterial;
 import org.gearvrf.GVRRenderData;
 import org.gearvrf.GVRSceneObject;
+import org.gearvrf.GVRShaderId;
 import org.gearvrf.GVRTexture;
 import org.gearvrf.animation.GVRAnimation;
 import org.gearvrf.animation.GVROnFinish;
@@ -64,10 +65,11 @@ public class SphereFlag extends GVRSceneObject {
 
     private boolean moveTogetherDashboard = false;
     private GVRContext gvrContext;
-
+    static int i = 0;
     public SphereFlag(GVRContext gvrContext, TypedArray sphere) {
         super(gvrContext);
-        setName(SceneObjectNames.SPHERE_FLAG);
+        setName(SceneObjectNames.SPHERE_FLAG + Integer.toString(i));
+        i++;
 
         this.gvrContext = gvrContext;
 
@@ -76,7 +78,7 @@ public class SphereFlag extends GVRSceneObject {
         GVRMaterial material = getMaterial();
         
         GVRRenderData renderData = getRenderData(material);
-
+        //renderData.disableLight();
         attachRenderData(renderData);
         
         updateMaterial();
@@ -125,8 +127,8 @@ public class SphereFlag extends GVRSceneObject {
     }
 
     private GVRMaterial getMaterial() {
-        GVRMaterial material = new GVRMaterial(gvrContext);
-        material.setShaderType(new SphereShader(gvrContext).getShaderId());
+        GVRMaterial material = new GVRMaterial(gvrContext, new GVRShaderId(SphereShader.class));
+        //material.setShaderType(new SphereShader(gvrContext).getShaderId());
         material.setTexture(SphereShader.TEXTURE_KEY,
                 gvrContext.loadTexture(new GVRAndroidResource(gvrContext, mTexture)));
         material.setFloat("blur", 0);
@@ -150,7 +152,7 @@ public class SphereFlag extends GVRSceneObject {
                 R.raw.sphere_uv_flag)));
         renderData.setMaterial(material);
         renderData.setRenderingOrder(100);
-        renderData.setAlphaBlend(true);
+       // renderData.setAlphaBlend(true);
         return renderData;
     }
 

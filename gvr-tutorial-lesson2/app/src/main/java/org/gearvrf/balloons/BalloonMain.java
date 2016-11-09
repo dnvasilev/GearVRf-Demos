@@ -69,10 +69,10 @@ public class BalloonMain extends GVRMain {
     {
         GVRSceneObject sphere = new GVRSphereSceneObject(context, true);
         GVRRenderData rdata = sphere.getRenderData();
-        GVRMaterial mtl = new GVRMaterial(context);
+        GVRMaterial mtl = new GVRMaterial(context, GVRMaterial.GVRShaderType.Phong.ID);
         mtl.setDiffuseColor(1.0f, 0.0f, 1.0f, 0.5f);
         sphere.setName("balloon");
-        rdata.setShaderTemplate(GVRPhongShader.class);
+        //rdata.setShaderTemplate(GVRPhongShader.class);
         rdata.setAlphaBlend(true);
         rdata.setMaterial(mtl);
         rdata.setRenderingOrder(GVRRenderingOrder.TRANSPARENT);
