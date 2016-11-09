@@ -1,21 +1,31 @@
+#version 300 es
 precision mediump float;
-varying vec2  coord;
-varying vec3  normal;
-varying vec3  view;
-varying vec3  light;
+
+in vec2  coord;
+in vec3  normal;
+in vec3  view;
+in vec3  light;
+
 uniform sampler2D HDRI_texture;
-uniform sampler2D texture;
+uniform sampler2D texture_t;
 uniform sampler2D second_texture;
-uniform vec3 trans_color;
-uniform mat4 u_mvp;
+
 vec2  animOffset;
-uniform float animTexture;
-uniform float blur;
-varying vec3  n;
-varying vec3  v;
-varying vec3  l;
-varying vec3  p;
-uniform float u_radius;
+
+in vec3  n;
+in vec3  v;
+in vec3  l;
+in vec3  p;
+
+layout (std140) uniform Material_ubo{
+    vec4 u_eye;
+    vec4 u_light;
+    vec4 trans_color;
+    vec4 animTexture;
+    vec4 blur;
+    vec4 u_radius;
+};
+out vec4 outCol;
 void main() {
 
 	vec2 reflect_coord;
@@ -24,7 +34,7 @@ void main() {
 
 	vec3  r = normalize(reflect(v,n));
     float b = dot(r,p);
-    float c = dot(p,p)-u_radius*u_radius;
+    float c = dot(p,p)-u_radius.x * u_radius.x;
     float t = sqrt(b*b-c);
 
     if( -b + t > 0.0 ) t = -b + t;
@@ -41,23 +51,23 @@ void main() {
     reflect_coord.x = 0.5 + 0.6*asin(reflect_coord.x)/1.57079632675;
     reflect_coord.y = 0.5 + 0.6*asin(reflect_coord.y)/1.57079632675;
 
-	animOffset = vec2(animTexture,0.0);
+	animOffset = vec2(animTexture.x,0.0);
 
-	vec4 reflect = texture2D(HDRI_texture, reflect_coord);
-	vec4 color = texture2D(texture, coord) / division;
-	vec3 color2 = texture2D(texture, coord ).rgb;
-	vec4 color3 = texture2D(second_texture, coord + animOffset - vec2(1,0.0));
+	vec4 reflect = texture(HDRI_texture, reflect_coord);
+	vec4 color = texture(texture_t, coord) / division;
+	vec3 color2 = texture(texture_t, coord ).rgb;
+	vec4 color3 = texture(second_texture, coord + animOffset - vec2(1,0.0));
 
-	color += texture2D(texture, (coord * (0.9)) + vec2(0.05,0.05)) / division;
-	color += texture2D(texture, (coord * (0.85)) + vec2(0.075,0.075)) / division;
-	color += texture2D(texture, (coord * (0.8)) + vec2(0.1,0.1)) / division;
-	color += texture2D(texture, (coord * (0.75)) + vec2(0.125,0.125)) / division;
-	color += texture2D(texture, (coord * (0.7)) + vec2(0.15,0.15)) / division;
-	color += texture2D(texture, (coord * (0.65)) + vec2(0.175,0.175)) / division;
+	color += texture(texture_t, (coord * (0.9)) + vec2(0.05,0.05)) / division;
+	color += texture(texture_t, (coord * (0.85)) + vec2(0.075,0.075)) / division;
+	color += texture(texture_t, (coord * (0.8)) + vec2(0.1,0.1)) / division;
+	color += texture(texture_t, (coord * (0.75)) + vec2(0.125,0.125)) / division;
+	color += texture(texture_t, (coord * (0.7)) + vec2(0.15,0.15)) / division;
+	color += texture(texture_t, (coord * (0.65)) + vec2(0.175,0.175)) / division;
 
-	vec3 finalColor = (color.rgb * blur) + (color2 * (1.0-blur));
+	vec3 finalColor = (color.rgb * blur.x) + (color2 * (1.0-blur.x));
 	if(color3.w == 0.0){
-		finalColor = (  trans_color * animTexture + (finalColor * (1.0 -animTexture))) + color3.rgb;
+		finalColor = (  trans_color.xyz * animTexture.x + (finalColor * (1.0 -animTexture.x))) + color3.rgb;
 	}
 
 	else{
@@ -75,6 +85,6 @@ void main() {
 	if(reflect.r > 0.5)
 		finalColor = (finalColor + reflect.rgb * reflect_intensity);
 
-	gl_FragColor = vec4( finalColor * 1.0 - blur/2.0, 1.0 );
-	gl_FragColor.a = 1.0 - min(0.9,blur * dot(v,n));
+	outCol = vec4( finalColor * 1.0 - blur.x/2.0, 1.0 );
+	outCol.a = 1.0 - min(0.9,blur.x * dot(v,n));
 }

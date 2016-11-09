@@ -35,7 +35,7 @@ public class SphereShader extends GVRShader{
     public static final String SECUNDARY_TEXTURE_KEY = "second_texture";
     public static final String ANIM_TEXTURE = "animTexture";
     public static final String BLUR_INTENSITY = "blur";
-    public static final String HDRI_TEXTURE_KEY = "hdri_texture";
+    public static final String HDRI_TEXTURE_KEY = "HDRI_texture";
 
     //private GVRCustomMaterialShaderId mShaderId;
     private GVRMaterialMap mCustomShader = null;
@@ -56,7 +56,7 @@ public class SphereShader extends GVRShader{
         mCustomShader.addUniformFloatKey(BLUR_INTENSITY, BLUR_INTENSITY);
         mCustomShader.addTextureKey("hdri_texture", HDRI_TEXTURE_KEY);*/
 
-        super("float3 u_eye, float3 u_light, float3 trans_color, float animTexture, float blur, float u_radius", "sampler2D texture_t sampler2D second_texture sampler2D hdri_texture", "float4 a_position, float3 a_normal, float2 a_tex_coord");
+        super("float3 u_eye, float3 u_light, float3 trans_color, float animTexture, float blur, float u_radius", "sampler2D texture_t sampler2D second_texture sampler2D HDRI_texture", "float4 a_position, float3 a_normal, float2 a_texcoord");
         Context context = gvrContext.getContext();
         setSegment("FragmentTemplate", TextFile.readTextFile(context, R.raw.sphereshader_fragment));
         setSegment("VertexTemplate", TextFile.readTextFile(context, R.raw.sphereshader_vertex));
