@@ -1,8 +1,8 @@
 attribute vec4 a_position;
 attribute vec3 a_normal;
-attribute vec2 a_texcoord;
+attribute vec2 a_tex_coord;
 uniform mat4 u_mvp;
-uniform vec3 eye;
+uniform vec3 u_eye;
 uniform vec3 u_light;
 varying vec3 normal;
 varying vec3 view;
@@ -17,13 +17,13 @@ void main() {
 
 	vec4 pos = u_mvp * a_position;
     normal = a_normal;
-	view  = eye - pos.xyz;
+	view  = u_eye - pos.xyz;
 	light = u_light;
-	coord = a_texcoord;
+	coord = a_tex_coord;
 	n = normalize(normal);
 	v = normalize(view);
     l = normalize(light);
     p = pos.xyz;
     gl_Position = pos;
-    
+
 }

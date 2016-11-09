@@ -133,6 +133,7 @@ public class Main extends GVRMain implements KeyboardEventListener {
 
         GVRCameraRig cameraObject = gvrContext.getMainScene()
                 .getMainCameraRig();
+        int i = 0;
         for (GVRSceneObject spherePack : flagListCostructor.listFlag) {
             rotateObject(spherePack, cameraObject.getTransform());
 
@@ -146,9 +147,13 @@ public class Main extends GVRMain implements KeyboardEventListener {
                     .getTransform()
                     .setScale(1 / scaleFactor, 1 / scaleFactor, 1 / scaleFactor);
 
+            spherePack.setName("Flag"+Integer.toString(i));i++;
+            //spherePack.getChildByIndex(0).getRenderData().disableLight();
             gvrContext.getMainScene().addSceneObject(spherePack);
+            //break;
         }
 
+        gvrContext.getMainScene().bindShaders();
     }
 
     public void createSpinnerInvisible() {
@@ -301,6 +306,7 @@ public class Main extends GVRMain implements KeyboardEventListener {
 
                 answer.spinnerUpdate();
         }
+
     }
 
     private void interactWithVisibleObjects() {
@@ -515,6 +521,7 @@ public class Main extends GVRMain implements KeyboardEventListener {
     }
 
     private void createAndAttachAllEyePointee() {
+
         for (GVRSceneObject object : mGVRContext.getMainScene()
                 .getWholeSceneObjects()) {
             if (object instanceof SphereFlag) {
