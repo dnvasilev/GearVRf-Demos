@@ -1,8 +1,16 @@
-uniform vec4 ambient_color;
+/*uniform vec4 ambient_color;
 uniform vec4 diffuse_color;
 uniform vec4 specular_color;
 uniform vec4 emissive_color;
-uniform float specular_exponent;
+uniform float specular_exponent;*/
+
+layout (std140) uniform Material_ubo{
+ vec4 ambient_color;
+ vec4 diffuse_color;
+ vec4 specular_color;
+ vec4 emissive_color;
+ vec4 specular_exponent;
+};
 
 struct Surface
 {

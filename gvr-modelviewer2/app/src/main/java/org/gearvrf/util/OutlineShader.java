@@ -26,17 +26,28 @@ public class OutlineShader extends GVRShader {
     private static final String VERTEX_SHADER =
             "layout(location = 0) in  vec4 a_position;\n"
                     + "layout(location = 1) in vec3 a_normal;\n"
-                    + "uniform mat4 u_mvp;\n"
-                    + "uniform float u_thickness;\n"
+                    + "layout (std140) uniform Transform_ubo{\n"
+                    +  "mat4 u_view;\n"
+                    +   "mat4 u_mvp;\n"
+                    +   "mat4 u_mv;\n"
+                    +  "mat4 u_mv_it;\n"
+                    +   "mat4 u_model;\n"
+                    +   "mat4 u_view_i;\n"
+                    +   "vec4 u_right;};"
+                    +  "layout (std140) uniform Material_ubo{ \n"
+                    + "vec4 u_color;\n"
+                    + "vec4 u_thickness; };"
                     + "void main() {\n"
-                    + "  vec4 pos = vec4(a_position.xyz + a_normal * u_thickness, 1.0);\n"
+                    + "  vec4 pos = vec4(a_position.xyz + a_normal * u_thickness.x, 1.0);\n"
                     + "  gl_Position = u_mvp * pos;\n"
                     + "}\n";
 
     private static final String FRAGMENT_SHADER =
             "precision mediump float;\n"
                     + "out vec4 outColor;\n"
-                    + "uniform vec4 u_color;\n"
+                    +  "layout (std140) uniform Material_ubo{ \n"
+                    + "vec4 u_color;\n"
+                    + "vec4 u_thickness; };\n"
                     + "void main() {\n"
                     + "  outColor = u_color;\n"
                     + "}\n";
