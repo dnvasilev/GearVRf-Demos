@@ -19,9 +19,11 @@ package org.gearvrf.video.shaders;
 import org.gearvrf.GVRContext;
 import org.gearvrf.GVRMaterialMap;
 import org.gearvrf.GVRMaterialShaderManager;
-import org.gearvrf.GVRCustomMaterialShaderId;
+import org.gearvrf.GVRShader;
+import org.gearvrf.GVRShaderData;
+//import org.gearvrf.GVRCustomMaterialShaderId;
 
-public class ScreenShader {
+public class ScreenShader extends GVRShader{
 
     public static final String SCREEN_KEY = "screen";
 
@@ -44,18 +46,24 @@ public class ScreenShader {
             + "  gl_FragColor = texture2D(u_screen, v_tex_coord);\n" //
             + "}\n";
 
-    private GVRCustomMaterialShaderId mShaderId;
+    //private GVRCustomMaterialShaderId mShaderId;
     private GVRMaterialMap mCustomShader = null;
 
     public ScreenShader(GVRContext gvrContext) {
+        /*
         final GVRMaterialShaderManager shaderManager = gvrContext
                 .getMaterialShaderManager();
         mShaderId = shaderManager.addShader(VERTEX_SHADER, FRAGMENT_SHADER);
         mCustomShader = shaderManager.getShaderMap(mShaderId);
-        mCustomShader.addTextureKey("u_screen", SCREEN_KEY);
+        mCustomShader.addTextureKey("u_screen", SCREEN_KEY);*/
+        super("", "samplerExternalOES u_screen", "float4 a_position, float3 a_normal, float2 a_tex_coord");
+        setSegment("FragmentTemplate", FRAGMENT_SHADER);
+        setSegment("VertexTemplate", VERTEX_SHADER);
     }
 
-    public GVRCustomMaterialShaderId getShaderId() {
-        return mShaderId;
+    protected void setMaterialDefaults(GVRShaderData material)
+    {
+        //material.setFloat("u_weight", 1);
+        //material.setFloat("u_fade", 1);
     }
 }

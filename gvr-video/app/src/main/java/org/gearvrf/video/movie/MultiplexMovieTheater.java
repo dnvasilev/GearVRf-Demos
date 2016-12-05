@@ -20,10 +20,12 @@ import android.media.MediaPlayer;
 import org.gearvrf.GVRAndroidResource;
 import org.gearvrf.GVRContext;
 import org.gearvrf.GVRExternalTexture;
+import org.gearvrf.GVRMaterial;
 import org.gearvrf.GVRMesh;
 import org.gearvrf.GVRRenderData;
 import org.gearvrf.GVRRenderPass;
 import org.gearvrf.GVRSceneObject;
+import org.gearvrf.GVRShaderId;
 import org.gearvrf.GVRTexture;
 import org.gearvrf.scene_objects.GVRVideoSceneObject;
 import org.gearvrf.video.shaders.RadiosityShader;
@@ -57,7 +59,8 @@ public class MultiplexMovieTheater extends MovieTheater {
             background.getRenderData().setCullFace(GVRRenderPass.GVRCullFaceEnum.None);
             // radiosity
             RadiosityShader radiosityShader = new RadiosityShader(context);
-            background.getRenderData().getMaterial().setShaderType(radiosityShader.getShaderId());
+            //background.getRenderData().getMaterial().setShaderType(radiosityShader.getShaderId());
+            background.getRenderData().setMaterial(new GVRMaterial(context, new GVRShaderId(RadiosityShader.class)));
             background.getRenderData().getMaterial().setTexture(
                     RadiosityShader.TEXTURE_OFF_KEY, backgroundLightOffTexture);
             background.getRenderData().getMaterial().setTexture(

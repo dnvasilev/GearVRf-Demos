@@ -18,14 +18,16 @@ package org.gearvrf.video.shaders;
 
 import org.gearvrf.GVRContext;
 import org.gearvrf.GVRMaterialMap;
-import org.gearvrf.GVRMaterialShaderManager;
-import org.gearvrf.GVRCustomMaterialShaderId;
+//import org.gearvrf.GVRMaterialShaderManager;
+//import org.gearvrf.GVRCustomMaterialShaderId;
+import org.gearvrf.GVRShader;
+import org.gearvrf.GVRShaderData;
 
-public class AdditiveShader {
+public class AdditiveShader extends GVRShader{
 
     public static final String TEXTURE_KEY = "texture";
-    public static final String WEIGHT_KEY = "weight";
-    public static final String FADE_KEY = "fade";
+    public static final String WEIGHT_KEY = "u_weight";
+    public static final String FADE_KEY = "u_fade";
 
     private static final String VERTEX_SHADER = "" //
             + "precision highp float;\n"
@@ -52,20 +54,26 @@ public class AdditiveShader {
             + "  gl_FragColor = vec4( u_fade*color, alpha );\n" //
             + "}\n";
 
-    private GVRCustomMaterialShaderId mShaderId;
+    //private GVRCustomMaterialShaderId mShaderId;
     private GVRMaterialMap mCustomShader = null;
 
     public AdditiveShader(GVRContext gvrContext) {
+        /*
         final GVRMaterialShaderManager shaderManager = gvrContext
                 .getMaterialShaderManager();
         mShaderId = shaderManager.addShader(VERTEX_SHADER, FRAGMENT_SHADER);
         mCustomShader = shaderManager.getShaderMap(mShaderId);
         mCustomShader.addTextureKey("texture", TEXTURE_KEY);
         mCustomShader.addUniformFloatKey("u_weight", WEIGHT_KEY);
-        mCustomShader.addUniformFloatKey("u_fade", FADE_KEY);
+        mCustomShader.addUniformFloatKey("u_fade", FADE_KEY);*/
+        super("float u_weight, float u_fade", "sampler2D texture", "float4 a_position, float3 a_normal, float2 a_tex_coord");
+        setSegment("FragmentTemplate", FRAGMENT_SHADER);
+        setSegment("VertexTemplate", VERTEX_SHADER);
     }
 
-    public GVRCustomMaterialShaderId getShaderId() {
-        return mShaderId;
+    protected void setMaterialDefaults(GVRShaderData material)
+    {
+        material.setFloat("u_weight", 1);
+        material.setFloat("u_fade", 1);
     }
 }

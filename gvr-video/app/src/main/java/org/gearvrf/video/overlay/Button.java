@@ -26,8 +26,8 @@ public class Button extends FocusableSceneObject {
 
     public Button(GVRContext gvrContext, GVRMesh mesh, GVRTexture active, GVRTexture inactive) {
         super(gvrContext, mesh, inactive);
-        this.getRenderData().getMaterial().setTexture("active_texture", active);
-        this.getRenderData().getMaterial().setTexture("inactive_texture", inactive);
+        this.getRenderData().getMaterial().setTexture("u_texture", active);
+        this.getRenderData().getMaterial().setTexture("u_texture", inactive);
         this.getRenderData().setRenderingOrder(GVRRenderData.GVRRenderingOrder.TRANSPARENT + 1);
         this.getRenderData().setOffset(true);
         this.getRenderData().setOffsetFactor(-1.0f);
@@ -38,13 +38,13 @@ public class Button extends FocusableSceneObject {
             @Override
             public void gainedFocus(FocusableSceneObject object) {
                 getRenderData().getMaterial().setMainTexture(
-                        getRenderData().getMaterial().getTexture("active_texture"));
+                        getRenderData().getMaterial().getTexture("u_texture"));
             }
 
             @Override
             public void lostFocus(FocusableSceneObject object) {
                 getRenderData().getMaterial().setMainTexture(
-                        getRenderData().getMaterial().getTexture("inactive_texture"));
+                        getRenderData().getMaterial().getTexture("u_texture"));
             }
         });
     }

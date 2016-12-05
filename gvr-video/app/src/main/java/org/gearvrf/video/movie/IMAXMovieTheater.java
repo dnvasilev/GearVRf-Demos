@@ -20,10 +20,12 @@ import android.media.MediaPlayer;
 import org.gearvrf.GVRAndroidResource;
 import org.gearvrf.GVRContext;
 import org.gearvrf.GVRExternalTexture;
+import org.gearvrf.GVRMaterial;
 import org.gearvrf.GVRMesh;
 import org.gearvrf.GVRRenderData;
 import org.gearvrf.GVRRenderPass;
 import org.gearvrf.GVRSceneObject;
+import org.gearvrf.GVRShaderId;
 import org.gearvrf.GVRTexture;
 import org.gearvrf.scene_objects.GVRVideoSceneObject;
 import org.gearvrf.video.shaders.AdditiveShader;
@@ -67,7 +69,8 @@ public class IMAXMovieTheater extends MovieTheater {
 
             // radiosity
             RadiosityShader radiosityShader = new RadiosityShader(context);
-            background.getRenderData().getMaterial().setShaderType(radiosityShader.getShaderId());
+            //background.getRenderData().getMaterial().setShaderType(radiosityShader.getShaderId());
+            background.getRenderData().setMaterial(new GVRMaterial(context, new GVRShaderId(RadiosityShader.class)));
             background.getRenderData().getMaterial().setTexture(
                     RadiosityShader.TEXTURE_OFF_KEY, backgroundLightOffTexture);
             background.getRenderData().getMaterial().setTexture(
@@ -75,7 +78,8 @@ public class IMAXMovieTheater extends MovieTheater {
             background.getRenderData().getMaterial().setTexture(
                     RadiosityShader.SCREEN_KEY, screenTexture);
             AdditiveShader additiveShader = new AdditiveShader(context);
-            additive.getRenderData().getMaterial().setShaderType(additiveShader.getShaderId());
+            //additive.getRenderData().getMaterial().setShaderType(additiveShader.getShaderId());
+            additive.getRenderData().setMaterial(new GVRMaterial(context, new GVRShaderId(AdditiveShader.class)));
             additive.getRenderData().getMaterial().setTexture(AdditiveShader.TEXTURE_KEY, additiveTexture);
             // screen
             GVRMesh screenMesh = context.loadMesh(new GVRAndroidResource(
