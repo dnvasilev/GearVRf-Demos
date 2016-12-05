@@ -266,7 +266,7 @@ public class FileBrowserUtils {
                         try {
                             GVRModelSceneObject model = gvrContext.loadModelFromSD(filename);
                             gvrContext.getMainScene().addSceneObject(model);
-                            gvrContext.getMainScene().bindShaders();
+                            //gvrContext.getMainScene().bindShaders();
 
                             // base the name for the model on the filename, minus the suffix.  Also add a prefix since there may already be (and i've already seen) a node inside the model based on the filename
                             int end = filename.lastIndexOf(".");

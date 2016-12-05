@@ -153,7 +153,7 @@ public class Main extends GVRMain implements KeyboardEventListener {
             //break;
         }
 
-        gvrContext.getMainScene().bindShaders();
+        //gvrContext.getMainScene().bindShaders();
     }
 
     public void createSpinnerInvisible() {

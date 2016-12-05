@@ -196,7 +196,7 @@ public class TextField extends GVRSceneObject {
                     character.attachEyePointeeHolder();
                     mListFieldItems.add(position, character);
                     addChildObject(character);
-                    getGVRContext().getMainScene().bindShaders();
+                    //getGVRContext().getMainScene().bindShaders();
 
                 }
             }

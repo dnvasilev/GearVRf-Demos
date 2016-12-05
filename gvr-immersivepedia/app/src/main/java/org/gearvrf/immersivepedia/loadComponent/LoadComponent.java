@@ -91,7 +91,7 @@ public class LoadComponent extends GVRSceneObject implements FocusListener {
         addChildObject(circleAlpha);
         addChildObject(plus);
         addChildObject(circle);
-        gvrContext.getMainScene().bindShaders(this);
+        //gvrContext.getMainScene().bindShaders(this);
     }
 
     private void loadTexture() {

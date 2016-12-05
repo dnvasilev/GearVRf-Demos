@@ -59,7 +59,7 @@ public class VideoComponent extends GVRSceneObject {
         createVideo();
         createSeekbar();
         createButtonBoard();
-        gvrContext.getMainScene().bindShaders(this);
+        //gvrContext.getMainScene().bindShaders(this);
         mediaPlayer.start();
     }
 

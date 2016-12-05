@@ -27,7 +27,7 @@ trex.setName("trex");
 scene.addSceneObject(trex);
 
 // done adding objects, bind shaders
-scene.bindShaders();
+//scene.bindShaders();
 
 // place trex
 trex.getTransform().setPosition(0.0, -2.0, -10.0);

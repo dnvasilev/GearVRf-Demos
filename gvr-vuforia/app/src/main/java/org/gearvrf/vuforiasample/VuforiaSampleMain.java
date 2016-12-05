@@ -164,7 +164,7 @@ public class VuforiaSampleMain extends GVRMain {
                     renderData.setDepthTest(false);
 
                     mainScene.getMainCameraRig().addChildObject(passThroughObject);
-                    mainScene.bindShaders();
+                    //mainScene.bindShaders();
                     isPassThroughVisible = true;
                 }
 

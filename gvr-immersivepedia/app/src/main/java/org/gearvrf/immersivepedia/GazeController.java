@@ -79,13 +79,13 @@ public class GazeController {
         }
         gvrContext.getMainScene().getMainCameraRig().addChildObject(highlightCursor);
         gvrContext.getMainScene().getMainCameraRig().addChildObject(cursor);
-        gvrContext.getMainScene().bindShaders();
+        //gvrContext.getMainScene().bindShaders();
     }
 
     public static void disableGaze() {
         gvrContext.getMainScene().getMainCameraRig().removeChildObject(highlightCursor);
         gvrContext.getMainScene().getMainCameraRig().removeChildObject(cursor);
-        gvrContext.getMainScene().bindShaders();
+        //gvrContext.getMainScene().bindShaders();
     }
 
 }
