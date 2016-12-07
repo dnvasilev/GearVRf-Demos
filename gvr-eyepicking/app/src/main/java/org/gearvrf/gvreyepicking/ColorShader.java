@@ -29,13 +29,43 @@ import android.content.Context;
 public class ColorShader extends GVRShader
 {
     private static final String VERTEX_SHADER = "in vec4 a_position;\n"
-            + "uniform mat4 u_mvp;\n"
+//            + "uniform mat4 u_mvp;\n"
+            + "layout (std140) uniform Transform_ubo{\n" +
+            "     mat4 u_view;\n" +
+            "     mat4 u_mvp;\n" +
+            "     mat4 u_mv;\n" +
+            "     mat4 u_mv_it;\n" +
+            "     mat4 u_model;\n" +
+            "     mat4 u_view_i;\n" +
+            "     vec4 u_right;\n" +
+            "};\n"
+
+            + "layout (std140) uniform Material_ubo{\n" +
+            "    vec4 u_mat1;\n" +
+            "    vec4 u_mat2;\n" +
+            "    vec4 u_mat3;\n" +
+            "    vec4 u_mat4;\n" +
+            "    vec4 u_eye;\n" +
+            "    vec4 u_light;\n" +
+            "    vec4 u_color;\n" +
+            "    vec4 u_radius;\n" +
+            "};"
             + "void main() {\n"
             + "  gl_Position = u_mvp * a_position;\n"
             + "}\n";
 
     private static final String FRAGMENT_SHADER = "precision mediump float;\n"
-            + "uniform vec4 u_color;\n"
+            //+ "uniform vec4 u_color;\n"
+            + "layout (std140) uniform Material_ubo{\n" +
+            "    vec4 u_mat1;\n" +
+            "    vec4 u_mat2;\n" +
+            "    vec4 u_mat3;\n" +
+            "    vec4 u_mat4;\n" +
+            "    vec4 u_eye;\n" +
+            "    vec4 u_light;\n" +
+            "    vec4 u_color;\n" +
+            "    vec4 u_radius;\n" +
+            "};"
             + "out vec4 fragColor;\n"
             + "void main() {\n"
             + "  fragColor = u_color;\n"

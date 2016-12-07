@@ -73,7 +73,7 @@ public class SampleMain extends GVRScript {
                 .setBackgroundColor(1.0f, 1.0f, 1.0f, 1.0f);
         mainScene.getEventReceiver().addListener(mPickHandler);
         mPicker = new GVRPicker(gvrContext, mainScene);
-        mColorShaderID = new GVRShaderId(ColorShader.class);
+        mColorShaderID = new GVRShaderId(GVRColorShader.class);
 
         /*
          * Adding Boards
@@ -181,8 +181,9 @@ public class SampleMain extends GVRScript {
 
     private GVRSceneObject getColorBoard(float width, float height) {
         GVRMaterial material = new GVRMaterial(mGVRContext, mColorShaderID);
-        material.setVec4("u_color", UNPICKED_COLOR_R,
-                UNPICKED_COLOR_G, UNPICKED_COLOR_B, UNPICKED_COLOR_A);
+        material.setColor(1.0f, 0, 0);
+        //material.setVec4("u_color", UNPICKED_COLOR_R,
+        //        UNPICKED_COLOR_G, UNPICKED_COLOR_B, UNPICKED_COLOR_A);
         GVRSceneObject board = new GVRSceneObject(mGVRContext, width, height);
         board.getRenderData().setMaterial(material);
        // material.setVec4("u_color", UNPICKED_COLOR_R,
@@ -192,8 +193,9 @@ public class SampleMain extends GVRScript {
 
     private GVRSceneObject getColorMesh(float scale, GVRMesh mesh) {
         GVRMaterial material = new GVRMaterial(mGVRContext, mColorShaderID);
-        material.setVec4("u_color", UNPICKED_COLOR_R,
-                UNPICKED_COLOR_G, UNPICKED_COLOR_B, UNPICKED_COLOR_A);
+        material.setColor(1.0f, 0, 0);
+        //material.setVec4("u_color", UNPICKED_COLOR_R,
+        //        UNPICKED_COLOR_G, UNPICKED_COLOR_B, UNPICKED_COLOR_A);
 
         GVRSceneObject meshObject = null;
         meshObject = new GVRSceneObject(mGVRContext, mesh);
