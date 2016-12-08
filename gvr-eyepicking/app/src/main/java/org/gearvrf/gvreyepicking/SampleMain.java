@@ -27,11 +27,11 @@ public class SampleMain extends GVRScript {
     {
         public void onEnter(GVRSceneObject sceneObj, GVRPicker.GVRPickedObject pickInfo)
         {
-            sceneObj.getRenderData().getMaterial().setVec4("u_color", PICKED_COLOR_R, PICKED_COLOR_G, PICKED_COLOR_B, PICKED_COLOR_A);
+            sceneObj.getRenderData().getMaterial().setColor(PICKED_COLOR_R, PICKED_COLOR_G, PICKED_COLOR_B);
         }
         public void onExit(GVRSceneObject sceneObj)
         {
-            sceneObj.getRenderData().getMaterial().setVec4("u_color", UNPICKED_COLOR_R, UNPICKED_COLOR_G, UNPICKED_COLOR_B, UNPICKED_COLOR_A);
+            sceneObj.getRenderData().getMaterial().setColor(UNPICKED_COLOR_R, UNPICKED_COLOR_G, UNPICKED_COLOR_B);
         }
         public void onNoPick(GVRPicker picker) { }
         public void onPick(GVRPicker picker) { }
@@ -181,28 +181,22 @@ public class SampleMain extends GVRScript {
 
     private GVRSceneObject getColorBoard(float width, float height) {
         GVRMaterial material = new GVRMaterial(mGVRContext, mColorShaderID);
-        material.setColor(1.0f, 0, 0);
-        //material.setVec4("u_color", UNPICKED_COLOR_R,
-        //        UNPICKED_COLOR_G, UNPICKED_COLOR_B, UNPICKED_COLOR_A);
+        material.setColor(UNPICKED_COLOR_R,
+                        UNPICKED_COLOR_G, UNPICKED_COLOR_B);
         GVRSceneObject board = new GVRSceneObject(mGVRContext, width, height);
         board.getRenderData().setMaterial(material);
-       // material.setVec4("u_color", UNPICKED_COLOR_R,
-        //        UNPICKED_COLOR_G, UNPICKED_COLOR_B, UNPICKED_COLOR_A);
         return board;
     }
 
     private GVRSceneObject getColorMesh(float scale, GVRMesh mesh) {
         GVRMaterial material = new GVRMaterial(mGVRContext, mColorShaderID);
-        material.setColor(1.0f, 0, 0);
-        //material.setVec4("u_color", UNPICKED_COLOR_R,
-        //        UNPICKED_COLOR_G, UNPICKED_COLOR_B, UNPICKED_COLOR_A);
+        material.setColor(UNPICKED_COLOR_R,
+                UNPICKED_COLOR_G, UNPICKED_COLOR_B);
 
         GVRSceneObject meshObject = null;
         meshObject = new GVRSceneObject(mGVRContext, mesh);
         meshObject.getTransform().setScale(scale, scale, scale);
         meshObject.getRenderData().setMaterial(material);
-       // material.setVec4("u_color", UNPICKED_COLOR_R,
-      //          UNPICKED_COLOR_G, UNPICKED_COLOR_B, UNPICKED_COLOR_A);
         return meshObject;
     }
 
