@@ -31,10 +31,32 @@ public class AdditiveShader extends GVRShader{
 
     private static final String VERTEX_SHADER = "" //
             + "precision highp float;\n"
-            + "attribute vec4 a_position;\n" //
-            + "attribute vec2 a_texcoord;\n"
-            + "uniform mat4 u_mvp;\n" //
-            + "varying vec2 coord;\n"
+            + "in vec4 a_position;\n" //
+            + "in vec2 a_texcoord;\n"
+
+            + "layout (std140) uniform Transform_ubo{\n" +
+            "     mat4 u_view;\n" +
+            "     mat4 u_mvp;\n" +
+            "     mat4 u_mv;\n" +
+            "     mat4 u_mv_it;\n" +
+            "     mat4 u_model;\n" +
+            "     mat4 u_view_i;\n" +
+            "     vec4 u_right;\n" +
+            "};\n"
+
+            + "layout (std140) uniform Material_ubo{\n" +
+            "    vec4 u_mat1;\n" +
+            "    vec4 u_mat2;\n" +
+            "    vec4 u_mat3;\n" +
+            "    vec4 u_mat4;\n" +
+            "    vec4 u_eye;\n" +
+            "    vec4 u_light;\n" +
+            "    vec4 u_color;\n" +
+            "    vec4 u_radius;\n" +
+            "};"
+
+           // + "uniform mat4 u_mvp;\n" //
+            + "out vec2 coord;\n"
             + "void main() {\n" //
             + "  coord = a_texcoord;\n"
             + "  gl_Position = u_mvp * a_position;\n" //
@@ -42,16 +64,29 @@ public class AdditiveShader extends GVRShader{
 
     private static final String FRAGMENT_SHADER = "" //
             + "precision highp float;\n"
-            + "varying vec2  coord;\n" //
-            + "uniform sampler2D texture;\n"
+            + "in vec2  coord;\n" //
+
+            + "layout (std140) uniform Material_ubo{\n" +
+            "    vec4 u_mat1;\n" +
+            "    vec4 u_mat2;\n" +
+            "    vec4 u_mat3;\n" +
+            "    vec4 u_mat4;\n" +
+            "    vec4 u_eye;\n" +
+            "    vec4 u_light;\n" +
+            "    vec4 u_color;\n" +
+            "    vec4 u_radius;\n" +
+            "};"
+
+            + "uniform sampler2D u_texture;\n"
             + "uniform float u_weight;\n" //
             + "uniform float u_fade;\n"
+            + "out vec4 FragColor;\n"
             + "void main() {\n"
-            + "  vec3 color1 = texture2D(texture, coord).rgb;\n"
+            + "  vec3 color1 = texture(u_texture, coord).rgb;\n"
             + "  vec3 color2 = vec3(0.0);\n"
             + "  vec3 color  = color1*(1.0-u_weight)+color2*u_weight;\n"
             + "  float alpha = length(color);\n"
-            + "  gl_FragColor = vec4( u_fade*color, alpha );\n" //
+            + "  FragColor = vec4( u_fade*color, alpha );\n" //
             + "}\n";
 
     //private GVRCustomMaterialShaderId mShaderId;
@@ -66,7 +101,7 @@ public class AdditiveShader extends GVRShader{
         mCustomShader.addTextureKey("texture", TEXTURE_KEY);
         mCustomShader.addUniformFloatKey("u_weight", WEIGHT_KEY);
         mCustomShader.addUniformFloatKey("u_fade", FADE_KEY);*/
-        super("float u_weight, float u_fade", "sampler2D texture", "float4 a_position, float3 a_normal, float2 a_tex_coord");
+        super("float u_weight, float u_fade", "sampler2D u_texture", "float4 a_position, float3 a_normal, float2 a_tex_coord", 300);
         setSegment("FragmentTemplate", FRAGMENT_SHADER);
         setSegment("VertexTemplate", VERTEX_SHADER);
     }

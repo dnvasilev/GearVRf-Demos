@@ -73,8 +73,8 @@ public class IMAXMovieTheater extends MovieTheater {
             background.getRenderData().setMaterial(new GVRMaterial(context, new GVRShaderId(RadiosityShader.class)));
             background.getRenderData().getMaterial().setTexture(
                     RadiosityShader.TEXTURE_OFF_KEY, backgroundLightOffTexture);
-            background.getRenderData().getMaterial().setTexture(
-                    RadiosityShader.TEXTURE_ON_KEY, backgroundLightOnTexture);
+            //background.getRenderData().getMaterial().setTexture(
+            //        RadiosityShader.TEXTURE_ON_KEY, backgroundLightOnTexture);
             background.getRenderData().getMaterial().setTexture(
                     RadiosityShader.SCREEN_KEY, screenTexture);
             AdditiveShader additiveShader = new AdditiveShader(context);
