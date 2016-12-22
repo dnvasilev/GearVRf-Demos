@@ -67,7 +67,7 @@ public class SampleMain extends GVRScript {
                 GVRRenderData.GVRRenderingOrder.OVERLAY);
         cursor.getRenderData().setDepthTest(false);
         cursor.getRenderData().setRenderingOrder(CURSOR_RENDER_ORDER);
-        mGVRContext.getMainScene().getMainCameraRig().addChildObject(cursor);
+       // mGVRContext.getMainScene().getMainCameraRig().addChildObject(cursor);
         
         try {
 
