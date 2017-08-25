@@ -64,7 +64,7 @@ public class GUIMain extends GVRMain {
 
     public GUIMain(GUIActivity activity,
                    final GVRFrameLayout frameLayout) {
-        this.frameLayout = frameLayout;g
+        this.frameLayout = frameLayout;
 
     }
 
