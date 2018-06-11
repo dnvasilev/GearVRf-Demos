@@ -18,7 +18,7 @@
 
 <!--
  This is a configuration file with default settings. You can assume that using this
- one will receive the same effect as gvr_note4_empty.xml.
+ one will receive the samfe effect as gvr_note4_empty.xml.
 -->
 
 <lens name="N4" >
@@ -29,7 +29,8 @@
         showLoadingIcon="true"
         useProtectedFramebuffer="false"
         useControllerTypes="gaze,gamepad,mouse,weartouchpad,controller,external"
-        useSrgbFramebuffer="false" >
+        useSrgbFramebuffer="false"
+        numControllers="2" >
 
         <mono-mode-parms
             monoFullScreen="false"
